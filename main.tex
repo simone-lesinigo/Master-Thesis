@@ -3,10 +3,14 @@
 \usepackage{graphicx}
 \usepackage{subfiles}
 \usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{xcolor}
 
 \usepackage{multibib}
 \newcites{references}{References}
 \newcites{online}{Online Sources}
+
+\input{custom_commands.tex}
 
 \begin{document}
     \subfile{frontispiece.tex}
@@ -19,8 +23,11 @@
     \listoftables
 
     \subfile{chapters/cha-introduction.tex}
-    \pagenumbering{arabic}
     \subfile{chapters/cha-SOA.tex}
+    \subfile{chapters/cha-approach.tex}
+    \subfile{chapters/cha-implementation.tex}
+    \subfile{chapters/cha-evaluation.tex}
+    \subfile{chapters/cha-conclusion.tex}
 
     % Bibliographies
     \bibliographystylereferences{unsrt}
