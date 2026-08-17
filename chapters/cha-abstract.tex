@@ -4,5 +4,10 @@
 
 \chapter*{Abstract}
 \label{chap:abstract}
+Grasping the overall architecture of large software systems is a challenging task. A plethora of software visualization approaches has been proposed to ease comprehension of the relationships among components and classes in such systems. A core problem is deciding how to place elements and how to connect them meaningfully, avoiding excessive overlaps and intersections that make visualizations cluttered and unintelligible.
+
+This thesis presents a novel approach based on Wave Function Collapse (WFC), a procedural generation algorithm inspired by quantum mechanics, which works on a grid of locally constrained cells, to connect (software) entities while discouraging overlaps and preserving the connectivity imposed by global constraints. We implement this approach in \wassis, a prototype developed in Pharo, and use it to explore the obtained results.
+
+We show how WFC can be tuned to reduce the amount of path crossings and explore its scalability challenges towards representing real-world software systems. Through single- and multi-relationship examples, we evaluate the characteristics of \wassis that produce structured, ``organic'' visualizations, discussing their potential and current limitations.
 
 \end{document}
