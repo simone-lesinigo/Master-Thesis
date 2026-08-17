@@ -2,6 +2,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{subfiles}
+\usepackage{hyperref}
+
+\usepackage{multibib}
+\newcites{references}{References}
+\newcites{online}{Online Sources}
 
 \begin{document}
     \subfile{frontispiece.tex}
@@ -16,4 +21,10 @@
     \subfile{chapters/cha-introduction.tex}
     \pagenumbering{arabic}
     \subfile{chapters/cha-SOA.tex}
+
+    % Bibliographies
+    \bibliographystylereferences{unsrt}
+    \bibliographyreferences{\subfix{references}}
+    \bibliographystyleonline{unsrt}
+    \bibliographyonline{\subfix{references}}
 \end{document}
