@@ -5,10 +5,15 @@
 
 \begin{document}
     \subfile{frontispiece.tex}
+    \subfile{chapters/cha-abstract.tex}
+
+    \pagenumbering{roman}
+
     \tableofcontents
     \listoffigures
     \listoftables
 
     \subfile{chapters/cha-introduction.tex}
-    \subfile{chapters/cha-related_work.tex}
+    \pagenumbering{arabic}
+    \subfile{chapters/cha-SOA.tex}
 \end{document}
