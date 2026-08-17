@@ -7,7 +7,7 @@
 \usepackage{xcolor}
 
 \usepackage{multibib}
-\newcites{references}{References}
+\newcites{bibliography}{Bibliography}
 \newcites{online}{Online Sources}
 
 \input{custom_commands.tex}
@@ -23,15 +23,15 @@
     \listoftables
 
     \subfile{chapters/cha-introduction.tex}
-    \subfile{chapters/cha-SOA.tex}
+    \subfile{chapters/cha-related_work.tex}
     \subfile{chapters/cha-approach.tex}
     \subfile{chapters/cha-implementation.tex}
     \subfile{chapters/cha-evaluation.tex}
     \subfile{chapters/cha-conclusion.tex}
 
     % Bibliographies
-    \bibliographystylereferences{unsrt}
-    \bibliographyreferences{\subfix{references}}
+    \bibliographystylebibliography{unsrt}
+    \bibliographybibliography{\subfix{references}}
     \bibliographystyleonline{unsrt}
     \bibliographyonline{\subfix{references}}
 \end{document}
