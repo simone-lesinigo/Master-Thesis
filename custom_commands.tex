@@ -1,3 +1,42 @@
+\usepackage{xspace}
+\usepackage{url}
+\usepackage{amssymb}
+
+% Title affiliations
+\newcommand{\USIlong}{Università della Svizzera italiana (USI), Lugano, Switzerland\xspace}
+\newcommand{\USIfull}{USI, Lugano, Switzerland\xspace}
+\newcommand{\SI}{Software Institute\xspace}
+\newcommand{\REVEALSI}{REVEAL @ \SI\xspace}
+\newcommand{\AFFILIATION}{\REVEALSI --- {\em\USIfull}\xspace}
+
+% Websites access
+\newcommand{\accessed}{ [acc. \today]\xspace}
+\newcommand{\urlttlight}[1]{\texttt{\href{}{#1}}}
+\newcommand{\urltt}[1]{\textbf{\texttt{\url{#1}}}}
+\newcommand{\hreftt}[2]{\textbf{\texttt{\href{#1}{#2}}}}
+\newcommand{\seeurl}[1]{\footnote{See~\urltt{#1}}\xspace}
+\newcommand{\maskedurl}[2]{\footnote{See~\hreftt{#2}{#1}}\xspace} % Markdown style arguments order (e.g., [Label](Link))
+\newcommand{\boldit}[1]{\textbf{\emph{#1}}\xspace}
+
+% Comments for drafting
+\usepackage{ifthen}
+\newboolean{showcomments}
+% Do not disable draft comments in the final version by simply setting this to false (it leaves unwanted spaces where comments are)
+\setboolean{showcomments}{true}
+\ifthenelse{\boolean{showcomments}}
+{
+	\newcommand{\nb}[2]{
+		\fbox{\bfseries\sffamily\scriptsize#1}
+		{\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}
+	}
+	\newcommand{\nbc}[1]{
+		\fbox{\bfseries\sffamily\scriptsize#1}
+	}
+}
+{
+	\newcommand{\nb}[2]{}
+}
+
 \newcommand{\ML}[1]{\textcolor{red}{\nb{MICHELE}{#1}}}
 \newcommand{\SL}[1]{\textcolor{orange}{\nb{SIMONE}{#1}}}
 \newcommand{\MR}[1]{\textcolor{blue}{\nb{MARCO}{#1}}}
@@ -21,5 +60,5 @@
 \newcommand{\etal}{\emph{et~al.}\xspace}
 
 % Tool Names Formatting
-\newcommand{\tool}[1]{{\sc #1}\xspace}
-\newcommand{\wassis}{\tool{Wassis}}
+\newcommand{\tool}[1]{{\textsc{#1}}\xspace}
+\newcommand{\wassis}{\tool{Wassis}\xspace}
