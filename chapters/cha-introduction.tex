@@ -5,6 +5,57 @@
 
 \chapter{Introduction}
 \setcounter{page}{1}
+\pagenumbering{arabic}
 \label{chap:introduction}
+\SL{Bisogna aggiungere una frase qui per non iniziare subito con una sezione?}
+\section{Context and Motivation}
+\label{sec:intro_motivation}
+Program comprehension is as old as software engineering itself. As software systems evolve and continuously grow in complexity, developers spend a significant portion of their time reading, navigating, and mentally reconstructing code structures rather than writing new features. Building and maintaining a mental model of a large codebase is a cognitive burden that affects daily software engineering tasks. An early study highlighted that program comprehension involves building an internal representation of the software by combining existing programming and domain knowledge with information obtained from source code and related documentation~\citebibliography{Von1995a}. This process is not necessarily linear: developers may start from high-level goals and previous knowledge and move towards specific implementation details, or instead build their understanding bottom-up by gradually grouping low-level code structures into higher-level concepts. During this process, they continuously formulate hypotheses about the purpose and behavior of program components, check them against the available information, and update their mental model as their understanding improves.
+
+Despite decades of improvements in integrated development environments (IDEs), new programming paradigms, and new programming languages, the amount of time developers spend trying to understand source code has remained surprisingly stable for over thirty years~\citebibliography{Sieg2016a}. As Siegmund observes, research on program comprehension went through a period of limited activity before becoming more active again in recent years. Modern research not only confirms the central role of program comprehension in software engineering, but also provides stronger empirical and physiological evidence of these cognitive processes. By using measurement techniques such as eye-tracking, electroencephalography (EEG), and functional magnetic resonance imaging (fMRI), recent studies directly measure the cognitive load associated with code understanding. These studies show that reading source code involves both language-processing and higher-level cognitive areas of the brain.
+
+Empirical measurements in development environments highlight the practical impact of this cognitive overload. Investigating developers' work habits, LaToza \etal~\citebibliography{LaTo2006a} revealed that developers invest massive effort into creating and maintaining mental models of software systems, which remain most unrecorded in formal documentation. Their study identified understanding the rationale behind existing code (such as understanding design decisions, historical changes, or temporary workarounds) as the most critical problem, reported as an issue by 66\% of surveyed developers. When documentation is insufficient or code exploration is not enough, developers often turn to face-to-face discussions with their colleagues to recover missing information, causing costly task switches and interruptions for their coworkers.
+
+Quantifying this effort directly within the IDE, Minelli \etal~\citebibliography{Min2015a} provided empirical evidence showing that program comprehension takes up most of a developer's time. By recording more than 5 million low-level UI events during nearly 200 hours of development in Pharo, they found that program comprehension absorbs roughly 70\% of a developer's time. In comparison, active code editing takes only 5\%, while navigation accounts for about 4\%. Their study also identified another important source of cognitive load: developers spend nearly 14\% of their time interacting with and rearranging the IDE's user interface.
+
+To address this problem, visual modeling languages (\eg UML~\citebibliography{Andr2005a}) and software visualizations~\citebibliography{Agou2022a,Wett2007a,Kuhn2010a} have been studied over the past decades. By presenting software structure and relationships visually, these approaches can help developers explore and understand complex systems without relying only on the source code.
+
+\section{Problem Statement}
+However, applying software visualization to real-world, large-scale systems introduces two fundamental and interconnected challenges:
+
+\begin{itemize}
+    \item \textbf{The Layout Problem:} Given a set of software entities, one must decide how to position them meaningfully on a canvas. Different layouts can highlight different structural or semantic aspects of the software, such as inheritance relationships, package structure, or coupling. A poor layout can hide important patterns and make the overall structure of the system harder to understand.
+
+    \item \textbf{The Connectivity Problem:} While displaying relationships (\eg inheritance, method calls, and dependencies) enrich the information about how the system is connected, large software graphs can become extremely dense. As the number of entities increases, the number of connections can grow rapidly, leading to visual clutter, numerous edge crossings, and incomprehensible representations.
+\end{itemize}
+
+\section{Proposed Approach}
+In this thesis, we explore a novel approach designed to tackle both problems.
+
+First, we use Multidimensional Scaling (MDS)~\citebibliography{Torg1952a,Doug1998a}, a dimensionality reduction technique, to establish the initial placement of software entities on the canvas according to their structural and semantic relationships.
+
+Second, to address the connectivity problem, we leverage Wave Function Collapse (WFC)~\citeonline{gumin2016wfc}, a procedural generation algorithm inspired by quantum mechanics. WFC generates coherent tile-based structures by propagating \emph{local constraints} across a \emph{grid} of \emph{cells}. Since constraints are defined at the \emph{tile} level (\ie specifying which elements can be placed in adjacent cells), WFC provides fine-grained control over the generated connections. This allows us to reduce visual clutter, such as overlapping lines, by restricting the set of possible tiles and adjusting their probabilities.
+
+Furthermore, WFC is intrinsically non-deterministic. For a given software system, it can generate multiple different yet valid layouts, offering developers distinct perspectives of the same system. However, dependency relationships are inherently global constraints, while WFC operates locally. We devised our approach to generate valid and consistent paths (also good but not necessarily optimal without a cleanup step), as exemplified in \figref{fig:example_introduction}, while ensuring that the generated connections reflect the actual relationships in the system.
+
+\begin{figure}[ht]  
+    \centering 
+    \includegraphics[width=0.97\linewidth]{figures/introduction/example_introduction} 
+    \caption{WFC-pure, 7 classes, 3 relationship types, no path optimization.}
+    \label{fig:example_introduction}
+\end{figure}
+
+\SL{Cambiare immagine}
+
+\section{Contributions}
+\begin{itemize}
+    \item 
+\end{itemize}
+
+\section{Document Structure}
+The chapters of this thesis are organized as follows:
+\begin{itemize}
+    \item 
+\end{itemize}
 
 \end{document}
