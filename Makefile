@@ -3,4 +3,4 @@
 clean:
 	latexmk -C main.tex chapters/*.tex
 	rm -f *.aux *.bbl *.blg *.log *.fls *.fdb_latexmk *.synctex.gz
-	rm -f chapters/*.aux chapters/*.bbl chapters/*.blg chapters/*.log chapters/*.fls chapters/*.fdb_latexmk chapters/*.synctex.gz chapters/*.out chapters/*.pdf
+	find chapters -type f \( -name "*.aux" -o -name "*.bbl" -o -name "*.blg" -o -name "*.log" -o -name "*.fls" -o -name "*.fdb_latexmk" -o -name "*.synctex.gz" -o -name "*.out" -o -name "*.pdf" \) -delete

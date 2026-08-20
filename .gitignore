@@ -20,5 +20,5 @@
 *.blg
 
 main.pdf
-chapters/*.pdf
+chapters/**/*.pdf
 cheatsheet.md

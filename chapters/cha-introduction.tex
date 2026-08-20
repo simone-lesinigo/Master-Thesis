@@ -7,7 +7,15 @@
 \setcounter{page}{1}
 \pagenumbering{arabic}
 \label{chap:introduction}
-\SL{Aggiungere la citazione a Thomas Ball - Software is intangible, having no physical shape or size. (Ball's dilemma)}
+
+As Thomas Ball stated:
+\begin{quote}
+    ``Software is intangible, having no physical shape or size.''~\citebibliography{Ball1996a}
+\end{quote}
+
+Unlike concrete objects, software has no shape that can be directly perceived. This raises a fundamental question: \emph{how can we represent something that has no physical form?} Software visualization addresses this question by mapping abstract software entities and relationships onto visual representations, making them easier to explore and understand.
+
+
 \section{Context and Motivation}
 \label{sec:intro_motivation}
 Program comprehension is as old as software engineering itself. As software systems evolve and continuously grow in complexity, developers spend a significant portion of their time reading, navigating, and mentally reconstructing code structures rather than writing new features. Building and maintaining a mental model of a large codebase is a cognitive burden that affects daily software engineering tasks. An early study highlighted that program comprehension involves building an internal representation of the software by combining existing programming and domain knowledge with information obtained from source code and related documentation~\citebibliography{Von1995a}. This process is not necessarily linear: developers may start from high-level goals and previous knowledge and move towards specific implementation details, or instead build their understanding bottom-up by gradually grouping low-level code structures into higher-level concepts. During this process, they continuously formulate hypotheses about the purpose and behavior of program components, check them against the available information, and update their mental model as their understanding improves.
@@ -34,18 +42,16 @@ In this thesis, we explore a novel approach designed to tackle both problems.
 
 First, we use Multidimensional Scaling (MDS)~\citebibliography{Torg1952a,Doug1998a}, a dimensionality reduction technique, to establish the initial placement of software entities on the canvas according to their structural and semantic relationships.
 
-Second, to address the connectivity problem, we leverage Wave Function Collapse (WFC)~\citeonline{gumin2016wfc}, a procedural generation algorithm inspired by quantum mechanics. WFC generates coherent tile-based structures by propagating \emph{local constraints} across a \emph{grid} of \emph{cells}. Since constraints are defined at the \emph{tile} level (\ie specifying which elements can be placed in adjacent cells), WFC provides fine-grained control over the generated connections. This allows us to reduce visual clutter, such as overlapping lines, by restricting the set of possible tiles and adjusting their probabilities.
+Second, to address the connectivity problem, we leverage Wave Function Collapse (WFC)~\citeonline{Gumin2016wfc}, a procedural generation algorithm inspired by quantum mechanics. WFC generates coherent tile-based structures by propagating \emph{local constraints} across a \emph{grid} of \emph{cells}. Since constraints are defined at the \emph{tile} level (\ie specifying which elements can be placed in adjacent cells), WFC provides fine-grained control over the generated connections. This allows us to reduce visual clutter, such as overlapping lines, by restricting the set of possible tiles and adjusting their probabilities.
 
 Furthermore, WFC is intrinsically non-deterministic. For a given software system, it can generate multiple different yet valid layouts, offering developers distinct perspectives of the same system. However, dependency relationships are inherently global constraints, while WFC operates locally. We devised our approach to generate valid and consistent paths (also good but not necessarily optimal without a cleanup step), as exemplified in \figref{fig:example_introduction}, while ensuring that the generated connections reflect the actual relationships in the system.
 
 \begin{figure}[ht]  
     \centering 
-    \includegraphics[width=0.97\linewidth]{figures/introduction/example_introduction} 
-    \caption{WFC-pure, 7 classes, 3 relationship types, no path optimization.}
+    \includegraphics[width=\linewidth]{figures/introduction/example_introduction} 
+    \caption{WFC-pure, 7 classes, 3 relationship types, no path optimization. \SL{Aggiornare l'immagine}}
     \label{fig:example_introduction}
 \end{figure}
-
-\SL{Cambiare immagine}
 
 \section{Contributions}
 \begin{itemize}
