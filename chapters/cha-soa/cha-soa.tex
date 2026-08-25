@@ -1,0 +1,24 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\chapter{State of the Art} 
+\label{chap:SOA}
+Software visualization requires deciding \emph{how} software entities should be represented and, after deciding how to place them, how to display their connections. Different approaches have been proposed to address these problems, so in this chapter we first examine software visualization techniques in \secref{sec:soa_soft_vis}. We then introduce Wave Function Collapse (WFC) in \secref{sec:soa_wfc}, explain how it works, and discuss its previous applications in procedural content generation and constraint satisfaction problems.
+
+\section{Software Visualization Techniques}
+\label{sec:soa_soft_vis} 
+
+\subfile{graph-based.tex}
+\subfile{polymetric_views.tex}
+\subfile{3DandVR.tex}
+\subfile{cartographic.tex}
+
+\section{Wave Function Collapse (WFC)}
+\label{sec:soa_wfc}
+Wave Function Collapse(WFC)~\citeonline{Gumin2016wfc}\citebibliography{Karth2022a} is a constraint-based procedural generation algorithm that operates on structures where the concept of neighbors is well-defined. It was created by Maxim Gumin in 2016~\citeonline{Gumin2016wfc}.
+
+\subfile{wfc-standard.tex}
+\subfile{wfc-variants.tex}
+
+\end{document}
