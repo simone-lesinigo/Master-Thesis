@@ -71,4 +71,13 @@ If a cell reaches an empty set of candidate tiles, a contradiction has occurred,
 
 Other WFC variants can introduce backtracking to recover from contradictions without restarting the entire generation. In this case, the algorithm can restore a previously saved state and make different choices from that point onward, relying on the fact that a different sequence of collapses may lead to a valid solution.
 
+In \figref{step-explanation}, we show a step of the main loop in the WFC algorithm (observation and propagation phases).
+
+\begin{figure}[ht] 
+   \centering 
+   \includegraphics[width=0.85\linewidth]{figures/soa/step-explanation} 
+   \caption{Example of one iteration step of the main WFC loop.}
+ \label{fig:step-explanation}
+\end{figure}
+
 \end{document}
