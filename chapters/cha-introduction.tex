@@ -39,9 +39,9 @@ However, applying software visualization to real-world, large-scale systems intr
 \end{itemize}
 
 \section{Proposed Approach}
-In this thesis, we explore a novel approach designed to tackle both problems.
+In this thesis, we explore a novel approach designed to tackle both problems. The approach is implemented in \wassis, a prototype developed in Pharo that combines Multidimensional Scaling (MDS) for class placement with Wave Function Collapse (WFC) for path generation.
 
-First, we use Multidimensional Scaling (MDS)~\citebibliography{Torg1952a,Doug1998a}, a dimensionality reduction technique, to establish the initial placement of software entities on the canvas according to their structural and semantic relationships.
+First, we use Multidimensional Scaling (MDS)~\citebibliography{Torg1952a,Doug1998a}, a dimensionality reduction technique, to establish the placement of software entities on the canvas according to their structural relationships.
 
 Second, to address the connectivity problem, we leverage Wave Function Collapse (WFC)~\citeonline{Gumin2016wfc}, a procedural generation algorithm inspired by quantum mechanics. WFC generates coherent tile-based structures by propagating \emph{local constraints} across a \emph{grid} of \emph{cells}. In our approach, the tiles represent small segments of the paths connecting software entities. WFC generates these paths by selecting a tile for each cell and propagating the constraints imposed by neighboring tiles. By combining a sequence of compatible tiles, complete paths can be generated while respecting the required connections between software entities. Since constraints are defined at the \emph{tile} level (\ie specifying which elements can be placed in adjacent cells), WFC provides fine-grained control over the generated connections. This allows us to reduce visual clutter, such as overlapping lines, by restricting the set of possible tiles and adjusting their probabilities.
 
