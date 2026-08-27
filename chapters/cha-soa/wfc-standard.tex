@@ -53,14 +53,17 @@ The algorithm builds the tileset and the corresponding constraint tables. The gr
 \textbf{Observation Phase (Lines 4 and 5).}
 During the observation phase the algorithm selects an uncollapsed cell and reduces its state from a superposition of multiple potential tiles to a single, definite tile. The choice of cell can be guided by different heuristics~\citebibliography{Karth2022a}. A common strategy is to select the cell with the lowest entropy, corresponding to the cell with the least uncertainty. Other strategies include random selection, maximum entropy, and predefined orders such as left-to-right, spiral, or Hilbert curves.
 
-Entropy can be defined simply as the number of remaining possible tiles. However, when at each tile is assigned a weight, Shannon entropy can be used. Given a set of possible tiles with weights $w_1,\ldots,w_n$, the Shannon entropy of the cell is defined as:
+Entropy can be defined simply as the number of remaining possible tiles. However, when at each tile is assigned a weight, Shannon entropy can be used. Given a set of possible tiles with weights $w_1, \ldots, w_n$, we first define the probability $p_i$ of picking tile $i$ by normalizing its weight over the sum of all remaining weights:
 
 \begin{equation}
-    H = \ln \left( \sum_{i=1}^{n} w_i \right) - \frac{\sum_{i=1}^{n} w_i \ln w_i}{\sum_{i=1}^{n} w_i}
-    \label{eq:shannon_entropy_unnormalized}
+    p_i = \frac{w_i}{\sum_{j=1}^{n} w_j}
 \end{equation}
 
-\SL{Aggiungere la reference al capitolo dell'implementation in cui si spiega perché é cosí e non viene usata la normale formula dell'entropia di Shannon}
+The standard Shannon entropy $H$ of the cell is then expressed as:
+
+\begin{equation}
+    H = - \sum_{i=1}^{n} p_i \ln p_i\
+\end{equation}
 
 After selecting a cell, WFC chooses one of its possible tiles. This choice can also be guided by different strategies. A weighted strategy assigns different probabilities to the possible tiles, while other strategies can select random, rarest, or most common tile~\citebibliography{Karth2022a}.
 
