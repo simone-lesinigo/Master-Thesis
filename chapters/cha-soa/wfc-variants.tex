@@ -54,6 +54,10 @@ WFC has been widely used in game development for environment and level generatio
 
 \end{figure}
 
+\paragraph{Global Constraints.}
+
+Standard Wave Function Collapse (WFC) relies on local neighbor rules, making it hard to control patterns across multiple cells or the entire map. Sandhu~\etal~\citebibliography{Sandh2019a} expanded WFC by adding non-local and design-level constraints, such as minimum and maximum item limits, tile dependencies, and changing weights dynamically during generation. These improvements allow the algorithm to follow global design requirements.
+
 \paragraph{Graph-based WFC.}
 
 Original WFC operates on a square grid. Kim~\etal~\citebibliography{Kim2019a} extended WFC to graphs, allowing it to work with structures where nodes can have a different number of neighbors. They applied their graph-based WFC to problems such as Sudoku and the Voronoi graph 4-coloring problem, as shown in \figref{fig:graph_wfc}.
@@ -78,10 +82,6 @@ Original WFC operates on a square grid. Kim~\etal~\citebibliography{Kim2019a} ex
 \end{figure}
 
 Kim~\etal~\citebibliography{Kim2025a} later adapted this approach for procedural level generation in logic puzzle games. They applied WFC to \emph{Strimko} and \emph{Flow} puzzles, showing that it can generate levels that satisfy the constraints of these games faster than depth-first search and genetic algorithms.
-
-\paragraph{Global Constraints.}
-
-Standard Wave Function Collapse (WFC) relies on local neighbor rules, making it hard to control patterns across multiple cells or the entire map. Sandhu~\etal~\citebibliography{Sandh2019a} expanded WFC by adding non-local and design-level constraints, such as minimum and maximum item limits, tile dependencies, and changing weights dynamically during generation. These improvements allow the algorithm to follow global design requirements.
 
 \paragraph{Designer Control.}
 
