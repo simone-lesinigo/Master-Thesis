@@ -19,6 +19,6 @@
 *.bbl
 *.blg
 
-main.pdf
+*.pdf
 chapters/**/*.pdf
 cheatsheet.md
