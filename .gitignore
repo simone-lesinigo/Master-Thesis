@@ -19,6 +19,7 @@
 *.bbl
 *.blg
 
-*.pdf
+main.pdf
+appendix*.pdf
 chapters/**/*.pdf
 cheatsheet.md
