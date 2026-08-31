@@ -1,0 +1,66 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Shannon Entropy Derivation}
+\label{sec:appendix_entropy}
+
+In this appendix, we derive Equation~\ref{eq:shannon_entropy_unnormalized} from the standard Shannon entropy formula. We also explain the computational benefits of using this formulation in the Wave Function Collapse (WFC) algorithm.
+
+\section*{Computational Motivation}
+
+During the observation phase of WFC, the entropy of candidate cells is calculated repeatedly to select the next cell to collapse. In the standard formulation, Shannon entropy requires the tile weights $w_1, \ldots, w_n$ to be normalized into probabilities $p_i~=~\frac{w_i}{\sum_{j=1}^{n} w_j}$. 
+
+By computing Shannon entropy directly from the unnormalized weights $w_i$, explicit probabilities $p_i$ do not need to be calculated.
+
+\section*{Algebraic Derivation}
+
+Let $w_1, \ldots, w_n$ be the weights of the possible tiles of a cell. Let $W$ be the sum of all weights:
+
+\begin{equation}
+    W = \sum_{j=1}^{n} w_j
+\end{equation}
+
+The probability $p_i$ of selecting tile $i$ is obtained by dividing its weight by the total weight $W$:
+
+\begin{equation}
+    p_i = \frac{w_i}{W}
+\end{equation}
+
+The standard Shannon entropy $H$ is defined as:
+
+\begin{equation}
+    H = - \sum_{i=1}^{n} p_i \ln p_i
+\end{equation}
+
+Substituting $p_i = \frac{w_i}{W}$ gives:
+
+\begin{equation}
+    H = - \sum_{i=1}^{n} \left( \frac{w_i}{W} \right) \ln \left( \frac{w_i}{W} \right)
+\end{equation}
+
+Using the logarithm rule $\ln\left(\frac{a}{b}\right) = \ln a - \ln b$, we obtain:
+
+\begin{align}
+    H &= - \sum_{i=1}^{n} \frac{w_i}{W} \left( \ln w_i - \ln W \right) = - \frac{1}{W} \sum_{i=1}^{n} w_i \ln w_i + \frac{\ln W}{W} \sum_{i=1}^{n} w_i
+\end{align}
+
+Since $\sum_{i=1}^{n} w_i = W$, the second term becomes:
+
+\begin{equation}
+    \frac{\ln W}{W} \sum_{i=1}^{n} w_i = \frac{\ln W}{W} \cdot W = \ln W
+\end{equation}
+
+Therefore, the entropy can be written as:
+
+\begin{equation}
+    H = \ln W - \frac{\sum_{i=1}^{n} w_i \ln w_i}{W}
+\end{equation}
+
+Finally, replacing $W$ with $\sum_{i=1}^{n} w_i$ gives the unnormalized Shannon entropy formula used in our approach:
+
+\begin{equation}
+    H = \ln \left( \sum_{i=1}^{n} w_i \right) - \frac{\sum_{i=1}^{n} w_i \ln w_i}{\sum_{i=1}^{n} w_i}
+\end{equation}
+
+\end{document}
