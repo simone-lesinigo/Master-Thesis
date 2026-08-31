@@ -92,4 +92,26 @@ We implemented five strategies for backtracking:
 
 When a checkpoint is restored, the tile that was originally selected at that decision point is removed from the cell's possible tiles before the cell is collapsed again. This prevents WFC from making the same choice and allows it to explore a different alternative.
 
+\subsection{Path Optimization}
+
+WFC generates valid paths between classes, but these paths are not always optimal. Since WFC uses local rules and random tile selection, despite weights boosting, paths may contain unnecessary deviations. To reduce these detours, we added an optional \textit{Path Optimization} step after WFC generation.
+
+The optimization removes the tiles of a selected path and rebuilds the path using Dijkstra's algorithm.
+
+\begin{itemize}
+
+\item \textbf{Direct Connections:} If the path connects two classes, Dijkstra's algorithm finds the shortest path between their border nodes.
+
+\item \textbf{Merged Paths:} If a path connects multiple classes, the algorithm builds a merged path connecting all of them. It works as follow:
+
+    \begin{enumerate}
+        \item \textit{Backbone Creation:} Dijkstra's algorithm is used to find the shortest path between every pair of classes. The longest path is chosen as the backbone.
+        \item \textit{Virtual Node Target:} Each remaining class is connected to the closest node of the backbone using the shortest path.
+        \item \textit{Backbone Expansion:} After a class is connected, the new branch of the path is added to the backbone. The remaining classes can connect to both the original backbone and the new branches.
+    \end{enumerate}
+
+\end{itemize}
+
+Finally, the selected cells are converted into path tiles, while the others into empty tiles.
+
 \end{document}

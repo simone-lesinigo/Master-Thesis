@@ -1,0 +1,55 @@
+% !TEX root = cha-approach.tex
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Computed Metrics}
+
+After the generation is completed, \wassis computes some metrics to describe the generated visualization. These metrics can be used to evaluate the quality and execution cost of the generated result.
+
+\paragraph{Grid Metrics}
+
+The following metrics describe the generated grid:
+
+\begin{itemize}
+    \item \textbf{Grid size}: The width and height of the generated grid.
+    \item \textbf{Number of nodes}: The total number of cells in the grid.
+    \item \textbf{Node types}: The number of cells containing classes, paths, or empty tiles.
+    \item \textbf{Number of overlaps}: The number of cells where two paths cross each other.
+\end{itemize}
+
+\paragraph{Path Metrics}
+
+These metrics describe the paths generated between classes:
+
+\begin{itemize}
+    \item \textbf{Total number of paths}: The total number of generated paths.
+    \item \textbf{Direct paths}: The number of paths that directly connect two classes without merging with another path.
+    \item \textbf{Merging paths}: The number of paths that merge with another path.
+    \item \textbf{Path length}: The length of each generated path.
+\end{itemize}
+
+\paragraph{Distance Metrics}
+
+For each pair of connected classes, \wassis computes the Manhattan distance between them on the grid. From these values, the average distance of each class to all the classes it is connected to is also computed.
+
+\paragraph{Software System Metrics}
+
+The following metrics describe the structure of the input system:
+
+\begin{itemize}
+    \item \textbf{Number of classes}: The total number of classes in the system.
+    \item \textbf{Number of connections}: The total number of connections of each class.
+    \item \textbf{Average connections per class}: The average number of connections considering all classes.
+\end{itemize}
+
+\paragraph{Execution Metrics}
+
+Finally, \wassis records information about the execution of the generation process:
+
+\begin{itemize}
+    \item \textbf{Total execution time}: The total time required to generate the visualization.
+    \item \textbf{Number of attempts}: The total number of WFC attempts, including attempts that failed and required a restart or grid expansion.
+\end{itemize}
+
+\end{document}
