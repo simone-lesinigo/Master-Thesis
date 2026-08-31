@@ -1,0 +1,88 @@
+% !TEX root = cha-approach.tex
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Layout via MDS}
+
+Before generating the paths, the classes have to be placed on the grid. This process consists of four steps:
+
+\begin{enumerate}
+    \item Determining the size of each class based on its number of connections. 
+    \item Computing a distance matrix between all pairs of classes.
+    \item Computing target 2D positions using Multidimensional Scaling (MDS).
+    \item Placing the classes on the grid while respecting the placement constraints.
+\end{enumerate}
+
+\subsection{Multi-cell Classes}
+
+A class can have many incoming and outgoing connections. Therefore, a single cell may not provide enough space for all its paths. To solve this problem, classes can occupy multiple cells.
+
+Each class is represented as a black square of cells, with side length $S = \lceil k/4 \rceil$, where 
+$k$ is the total number of connections of the class, calculated as the sum of its incoming and outgoing connections. For example, a class with up to four connections occupies one cell ($1 \times 1$), while a class with five to eight connections occupies a $2 \times 2$ region and so on. This provides enough space for its paths to enter and leave.
+
+\subsection{Distance Matrix}
+
+To determine the position of the classes, we build an $n \times n$ distance matrix, where $n$ is the total number of classes. 
+
+The distance between Class A and Class B is calculated as the reciprocal of the sum of the weights of their connections:
+
+$$\text{Distance}(A, B) = \frac{1}{\sum \text{Weight of connections between } A \text{ and } B}$$
+
+Different relationship types can be assigned different weights. For example, a method call can have a weight of $2$, while an attribute access can have a weight of $1$. If Class A calls a method in Class B and Class B reads an attribute of Class A, their total connection weight is $2 + 1 = 3$, resulting in a distance of $\frac{1}{3}$.
+
+If two classes have no direct connection, their initial distance is set to a maximum default value.
+
+After filling the matrix with direct distances, we apply the Floyd-Warshall algorithm~\citebibliography{Floy1962a}. This computes the shortest distance between all pairs of classes, enriching the information given to MDS with indirect relationships.
+
+Note that classes that are not connected, either directly or indirectly, preserve the maximum default distance from all other classes.
+
+\subsection{Target Position On Grid}
+
+We apply metric Multidimensional Scaling (mMDS)~\citebibliography{Torg1952a,Doug1998a} to convert the distance matrix into 2D coordinates, in order to preserve the distances between classes as much as possible.
+
+The resulting coordinates are then normalized and scaled to fit the current grid size. An example of assigned positions is presented in \figref{fig:MDS-positions}. The number inside each square indicates how many classes were assigned to that specific position by mMDS, as strongly connected entities may occasionally be mapped to identical coordinates.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/approach/MDS-positions}
+    \caption{Example of target positions calculated by mMDS (normalized and scaled to the grid).}
+    \label{fig:MDS-positions}
+\end{figure}
+
+\subsection{Class Placement Strategy}
+
+After mMDS provides the target positions, classes are placed on the grid one at a time.
+
+\paragraph{Class Placement Order}
+
+The order in which classes are placed may affect the final layout. Our approach supports five ordering strategies:
+
+\begin{itemize}
+    \item \textbf{Random}: Classes are placed in a random order.
+    \item \textbf{Minimum Connections First}: Classes are sorted by their total number of connections, from the fewest to the most.
+    \item \textbf{Maximum Connections First}: Classes are sorted by their total number of connections, from the most to the fewest.
+    \item \textbf{BFS Minimum}: Breadth-First Search (BFS) starting from the class with the fewest number of connections.
+    \item \textbf{BFS Maximum}: Breadth-First Search (BFS) starting from the class with the most number of connections.
+\end{itemize}
+
+To leave enough space for paths, a minimum distance is kept between classes. This parameter defines the minimum number of empty cells required between two classes.
+
+For example, if the minimum distance is $3$, at least three empty cells must separate the borders of two classes horizontally, vertically, and diagonally. 
+\SL{C'é bisogno di un'immagine esplicativa?}
+
+\paragraph{Candidates Search}
+
+For each class, the algorithm searches for a valid position as follows:
+
+\begin{enumerate}
+    \item The algorithm first tries to place the class at the target position computed by mMDS.
+    \item If the target position is not valid, the algorithm searches for a valid position in expanding rings around it, starting with the first ring around the target position.
+    \item If one or more valid positions are found in the current ring, the position with the smallest total Manhattan distance to the already placed connected classes is selected.
+    \item If no valid position is found in the current ring, the algorithm continues with the next ring.
+    \item This process is repeated until at least one valid position is found.
+\end{enumerate}
+
+If no valid position is found for a class, the grid is expanded and the placement process restarts.
+
+\end{document}
