@@ -68,6 +68,7 @@ Note that ``black paths'' (\figref{fig:pathID_resolution}) do not have informati
 Our approach does not explicitly minimize path crossings through a dedicated optimization step. Instead, crossings are naturally minimized during path generation by assigning them a weight of zero (\subsecref{subsec:wassis_observation_phase}). As a result, Wave Function Collapse introduces crossing tiles only when constraint propagation eliminates all the alternatives, ensuring they appear only when strictly necessary to complete a path.
 
 \subsection{Backtracking Strategies}
+\label{subsec:backtracking_strategies}
 
 The standard Wave Function Collapse (WFC) implementation~\citeonline{Gumin2016wfc} does not support backtracking and restart from scratch when a contradiction occurs. Inspired by the work of Karth~\etal~\citebibliography{Karth2022a}, we introduced backtracking into our approach to improve the success rate of the generation.
 
@@ -93,6 +94,7 @@ We implemented five strategies for backtracking:
 When a checkpoint is restored, the tile that was originally selected at that decision point is removed from the cell's possible tiles before the cell is collapsed again. This prevents WFC from making the same choice and allows it to explore a different alternative.
 
 \subsection{Path Optimization}
+\label{subesc-approach:path_optimization}
 
 WFC generates valid paths between classes, but these paths are not always optimal. Since WFC uses local rules and random tile selection, despite weights boosting, paths may contain unnecessary deviations. To reduce these detours, we added an optional \textit{Path Optimization} step after WFC generation.
 
