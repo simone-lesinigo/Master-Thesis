@@ -93,7 +93,7 @@ We implemented five strategies for backtracking:
     \item \textbf{Restart:} Clears the current grid and starts the generation again from the beginning.
 \end{itemize}
 
-When a checkpoint is restored, the tile that was originally selected at that decision point is removed from the cell's possible tiles before the cell is collapsed again. This prevents WFC from making the same choice and allows it to explore a different alternative.
+When a checkpoint is restored, if the tile that was originally selected at that decision point was a path tile, it is removed from the cell's possible tiles before the cell is collapsed again. This prevents WFC from making the same choice and allows it to explore a different alternative.
 
 \subsection{Path Optimization}
 \label{subesc-approach:path_optimization}
