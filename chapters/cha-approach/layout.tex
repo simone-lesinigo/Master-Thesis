@@ -4,6 +4,7 @@
 \begin{document}
 
 \section{Layout via MDS}
+\label{sec:layout_via_MDS}
 
 Before generating the paths, the classes have to be placed on the grid. This process consists of four steps:
 
@@ -27,7 +28,10 @@ To determine the position of the classes, we build an $n \times n$ distance matr
 
 The distance between Class A and Class B is calculated as the reciprocal of the sum of the weights of their connections:
 
-$$\text{Distance}(A, B) = \frac{1}{\sum \text{Weight of connections between } A \text{ and } B}$$
+\begin{equation}
+    \label{eq:class-distance}
+    \text{Distance}(A, B) = \frac{1}{\sum \text{Weight of connections between } A \text{ and } B}
+\end{equation}
 
 Different relationship types can be assigned different weights. For example, a method call can have a weight of $2$, while an attribute access can have a weight of $1$. If Class A calls a method in Class B and Class B reads an attribute of Class A, their total connection weight is $2 + 1 = 3$, resulting in a distance of $\frac{1}{3}$.
 
@@ -35,7 +39,7 @@ If two classes have no direct connection, their initial distance is set to a max
 
 After filling the matrix with direct distances, we apply the Floyd-Warshall algorithm~\citebibliography{Floy1962a}. This computes the shortest distance between all pairs of classes, enriching the information given to MDS with indirect relationships.
 
-Note that classes that are not connected, either directly or indirectly, preserve the maximum default distance from all other classes.
+Note that classes that are not connected, either directly or indirectly, are assigned a maximum default distance from all other classes.
 
 \subsection{Target Position On Grid}
 
@@ -69,7 +73,6 @@ The order in which classes are placed may affect the final layout. Our approach 
 To leave enough space for paths, a minimum distance is kept between classes. This parameter defines the minimum number of empty cells required between two classes.
 
 For example, if the minimum distance is $3$, at least three empty cells must separate the borders of two classes horizontally, vertically, and diagonally. 
-\SL{C'é bisogno di un'immagine esplicativa?}
 
 \paragraph{Candidates Search}
 
@@ -84,5 +87,14 @@ For each class, the algorithm searches for a valid position as follows:
 \end{enumerate}
 
 If no valid position is found for a class, the grid is expanded and the placement process restarts.
+
+An example of this process for a class strongly connected to an already placed class is provided in \figref{fig:candidate_search}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/approach/candidate_search}
+    \caption{Candidate Search Example (Minimum Distance: 2)}
+    \label{fig:candidate_search}
+\end{figure}
 
 \end{document}
