@@ -24,7 +24,7 @@ To handle these cases, we perform a path ID propagation step immediately after c
 
 An example of this process is illustrated in \figref{fig:pathID_resolution}. In the state shown on the left, a path segment has been collapsed using placeholder tiles (shown as black paths) because its specific path ID was temporarily unknown. In the next step, when the cell highlighted with the green border collapses into a resolved tile (a T-junction connected to the main path), it propagates the information about the concrete path ID to the path segment, immediately resolving it into concrete tiles. 
 
-Once all placeholders are resolved, WFC performs standard propagation from the collapsed cell and from each cell whose path ID was resolved. This ensures that the new constraints are propagated to neighboring cells.
+Once all placeholders are resolved, WFC performs standard propagation from the collapsed cell. This ensures that the new constraints are propagated to neighboring cells.
 
 \begin{figure}[htbp]
     \centering
@@ -83,6 +83,15 @@ When a contradiction occurs, the generation process follows this recovery proces
     \item \textbf{Grid Expansion:} If all previous attempts fail, the grid size is increased and the generation starts again from the beginning.
 \end{enumerate}
 
+The backtracking workflow is shown in \figref{fig:backtracking_workflow}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.71\linewidth]{figures/approach/backtracking_workflow}
+    \caption{Backtracking workflow}
+    \label{fig:backtracking_workflow}
+\end{figure}
+
 We implemented five strategies for backtracking:
 
 \begin{itemize}
@@ -93,7 +102,7 @@ We implemented five strategies for backtracking:
     \item \textbf{Restart:} Clears the current grid and starts the generation again from the beginning.
 \end{itemize}
 
-When a checkpoint is restored, if the tile that was originally selected at that decision point was a path tile, it is removed from the cell's possible tiles before the cell is collapsed again. This prevents WFC from making the same choice and allows it to explore a different alternative.
+When a checkpoint is restored, the cell is brought back to the state it had immediately before the original collapse. If the tile originally selected was a path tile, it is removed from the cell's possible tiles before the cell is collapsed again. This prevents WFC from making the same choice and allows it to explore a different alternative.
 
 \subsection{Path Optimization}
 \label{subesc-approach:path_optimization}
