@@ -55,8 +55,21 @@ Furthermore, WFC is intrinsically non-deterministic. For a given software system
 \end{figure}
 
 \section{Contributions}
+
+The primary goal of this thesis is to investigate how Wave Function Collapse (WFC) can be adapted to generate software visualizations. The main contributions of this work are:
+
 \begin{itemize}
-    \item 
+
+    \item \textbf{A hybrid approach for software visualization:} We propose an approach that combines Multidimensional Scaling (MDS) for placing software classes with Wave Function Collapse (WFC) for generating the connections between them. 
+
+    \item \textbf{A method for imposing global constraints using WFC local constraints:} We show how global connectivity constraints can be imposed using only the local constraints of WFC. This allows the algorithm to generate paths that connect only the intended classes, preventing connections between unrelated classes.
+
+    \item \textbf{WFC tuning:} We present several extensions to adapt WFC to software visualization. These include multi-cell classes, maximum-entropy heuristic, directional path exits, dynamic tile weights, crossing avoidance, and backtracking strategies. Together, these changes make WFC suitable for our problem. 
+
+    \item \textbf{Prototype implementation:} We implement the proposed approach in \wassis, a prototype developed in Pharo. \wassis provides the complete pipeline from source code analysis to class placement, WFC path generation, optional path optimization, and visualization. It also includes mechanisms for backtracking, memory management, and parallel execution to support the generation process.
+
+    \item \textbf{Research paper:} Part of this work was published as a paper at VISSOFT 2026 in the NIER Track. This thesis extends that work with a more detailed description of the approach, additional WFC adaptations, implementation details, and an analysis of its characteristics and limitations.
+
 \end{itemize}
 
 \section{Document Structure}
