@@ -122,18 +122,18 @@ After computing the preferred directions, each path is assigned to a specific bo
 
 \begin{enumerate}
 
-    \item Paths are first grouped by their primary preferred direction. Each group corresponds to one side of the class footprint, and paths in the same group compete for the cells available on that side.
+    \item Paths are first grouped by their primary preferred direction. Each group corresponds to one side of the class footprint, and paths in the same group compete for the cells available on that side. 
 
-    \item Within each group, paths are ordered by their primary direction cost. Paths with lower costs are assigned first. This gives priority to the paths that have a stronger preference for that side when there are more paths than available cells.
+    \item Groups with more paths are processed first, this order never change. Within each group, paths are ordered by their primary direction cost. Paths with lower costs are assigned first. This gives priority to the paths that have a stronger preference for that side when there are more paths than available cells.
 
-    \item For each path, its secondary direction is used to determine its position along the side. The path is assigned to the first available cell in the direction of its secondary preference. For example, if the primary direction is \textit{right} and the secondary direction is \textit{up}, the path is assigned to the highest available cell on the right side (\ie the cell with the minimum row index).
+    \item For each path in a group, its secondary direction is used to determine its position along the side. The path is assigned to the first available cell in the direction of its secondary preference. For example, if the primary direction is \textit{right} and the secondary direction is \textit{up}, the path is assigned to the highest available cell on the right side (\ie the cell with the minimum row index).
 
-    \item If all cells on a side are already assigned, the remaining paths are moved to the group corresponding to their next preferred direction. When a path is moved to a new group, the direction of the side where it was originally placed becomes its secondary direction. More generally, the secondary direction is the first preferred direction that is different from the direction of the group. For example, if a path has the preference order \textit{up}, \textit{left}, \textit{down}, \textit{right}, but there is no available cell in the \textit{up} group, it is moved to the \textit{left} group. In this case, \textit{up} becomes its secondary direction and is used to choose its position on the left side.
-
-    \item The process is repeated until all paths have been assigned.
+    \item If all cells on a side are already assigned, the remaining paths are moved to the group corresponding to their next preferred direction. When a path is moved to a new group, the direction of the side where it was originally placed becomes its secondary direction. More generally, the secondary direction is the first preferred direction that is different from the direction of the group. For example, if a path has the preference order \textit{up}, \textit{left}, \textit{down}, \textit{right}, but there is no available cell in the \textit{up} group, it is moved to the \textit{left} group. In this case, \textit{up} becomes its secondary direction and is used to choose its position on the left side. The cost of the direction to which the path is moved is then set to zero. This gives the moved path priority within the new group, ensuring that it is assigned before paths that originally preferred that direction. This prevents the path from not being able to compete in the new group and being moved to another direction again.
+    
+    \item The process is repeated from point 3 until all paths have been assigned. As the footprint size of each class is computed from its total number of connections, enough border cells are available to place all its paths.
 
 \end{enumerate}
 
-This approach keeps paths with similar directions close to each other and helps reduce crossings immediately after leaving the class. As the footprint size of each class is computed from its total number of connections, enough border cells are available to place all its paths.
+This approach keeps paths with similar directions close to each other and helps reduce crossings immediately after leaving the class. 
 
 \end{document}
