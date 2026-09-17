@@ -75,8 +75,7 @@ The second mode is designed to find a valid solution as quickly as possible. All
 
 This approach provides parallel execution while keeping each WFC generation single-threaded.
 
-\section{Tool}
-\SL{Aggiungere screenshot del tool}
+\subfile{tool.tex}
 
 \section{Summary}
 
@@ -90,5 +89,6 @@ Contradictions are handled through backtracking strategies implemented using the
 
 Finally, garbage collection is performed after failed attempts that require grid expansion to prevent memory usage from growing across generations. Since Pharo does not support true multithreading, \wassis runs multiple independent Pharo images to generate solutions in parallel.
 
+The implementation also includes a user interface that allows users to configure the generation, select the input system, and inspect the generated visualization. The tool provides additional views, including the step-by-step WFC animation, metrics dashboard, system graph, classes distance matrix, and MDS placement. These views support both the inspection of the generated solution and the analysis of the generation process.
 
 \end{document}
