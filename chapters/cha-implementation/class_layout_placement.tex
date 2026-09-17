@@ -118,7 +118,7 @@ An example is provided in \figref{fig:cosine_similarity}. Since the source class
 
 \paragraph{Border Cell Assignment}
 
-After computing the preferred directions, each path is assigned to a specific border cell of the class footprint. Each path has an ordered list of preferred directions, from the most to the least preferred one. The assignment is illustrated in \figref{fig:border_cell_assignment} and is performed as follows:
+After computing the preferred directions, each path is assigned to a specific border cell of the class footprint. Each path has an ordered list of preferred directions, from the most to the least preferred one. The overall process is illustrated in the workflow of \figref{fig:border_cell_assignment_workflow}, while a concrete execution example is shown in \figref{fig:border_cell_assignment_example}. The assignment is performed as follows:
 
 \begin{enumerate}
 
@@ -136,11 +136,18 @@ After computing the preferred directions, each path is assigned to a specific bo
 
 This approach keeps paths with similar directions close to each other and helps reduce crossings immediately after leaving the class. 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.82\linewidth]{figures/implementation/border_cell_assignment_workflow}
+    \caption{Workflow of the border cell assignment process.}
+    \label{fig:border_cell_assignment_workflow}
+\end{figure}
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{figures/implementation/border_cell_assignment}
     \caption{Example of the path assignment to border cells process. }
-    \label{fig:border_cell_assignment}
+    \label{fig:border_cell_assignment_example}
 \end{figure}
 
 \end{document}
