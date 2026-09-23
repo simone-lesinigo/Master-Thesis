@@ -22,7 +22,7 @@ This information can also be used for backtracking. If a generation reaches more
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.9\linewidth]{figures/application/path_completion_point}
-  \caption{PCP distribution for 193 instances. \SL{Lo spazio bianco é lasciato intenzionalmente perché secondo me rende meglio l'effetto di vedere tutto spostato a sinistra}}
+  \caption{PCP distribution for 193 instances.}
   \label{fig:path_completion_point}
 \end{figure}
 
@@ -86,11 +86,17 @@ All four solutions are generated using pure WFC. These examples show that the PC
 
 \subsection{PCP vs Execution Time}
 
+Since a lower PCP corresponds to fewer path tiles that needed to be generated, we expect that a lower PCP also leads to a shorter execution time. \figref{fig:pcp_vs_execTime_scatter} compares PCP and execution time for the 193 tested instances.
+
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{figures/application/pcp_vs_execTime_scatter}
-    \caption{PCP over execution time.}
-    \label{fig:pcp_vs_execTime_scatter}
+  \centering
+  \includegraphics[width=\linewidth]{figures/application/pcp_vs_execTime_scatter}
+  \caption{PCP over execution time for 193 WFC instances.}
+  \label{fig:pcp_vs_execTime_scatter}
 \end{figure}
+
+As shown in the scatter plot, the points are widely scattered, showing no relationship between the two metrics. For every PCP value, the execution time varies significantly.
+
+The absence of a clear correlation is further confirmed by the trend line, which is almost flat. The Spearman correlation is also low ($\rho = 0.23$), indicating a very weak positive correlation, although it is statistically significant ($p = 0.001$). Therefore, a lower PCP does not guarantee a faster generation time.
 
 \end{document}
