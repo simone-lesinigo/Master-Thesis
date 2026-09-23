@@ -5,12 +5,12 @@
 
 \section{Class Layout and Placement}
 
-The placement process converts the structural relationships between classes into positions on the grid. The implementation follows the steps described in \secref{sec:layout_via_MDS}: computing pairwise distances, obtaining a two dimensional embedding using metric Multidimensional Scaling (mMDS), mapping the resulting coordinates to grid positions, and placing the classes while respecting the defined constraints.
+The placement process converts the structural relationships between classes into positions on the grid. The implementation follows the steps described in \secref{sec:layout_via_MDS}: computing pairwise distances, obtaining a two-dimensional embedding using metric Multidimensional Scaling (mMDS), mapping the resulting coordinates to grid positions, and placing the classes while respecting the defined constraints.
 
 \subsection{Distance Matrix and MDS}
 First, an $n \times n$ distance matrix is created, where $n$ is the number of classes. The diagonal is initialized to zero, while all other entries are initialized to infinity. Direct relationships are then used to fill the distances between connected classes. The distance of a relationship is computed as the reciprocal of its weight (\equref{eq:class-distance}), so stronger relationships result in smaller distances.
 
-After the direct distances have been added, the Floyd-Warshall algorithm~\citebibliography{Floy1962a} (presented in \algref{alg:floyd-warshall}) is used to compute the shortest distance between every pair of classes. This enrich the distance matrix with indirect relationships.
+After the direct distances have been added, the Floyd-Warshall algorithm~\citebibliography{Floy1962a} (presented in \algref{alg:floyd-warshall}) is used to compute the shortest distance between every pair of classes. This enriches the distance matrix with indirect relationships.
 
 \begin{algorithm}
 \caption{Floyd-Warshall}
@@ -40,7 +40,7 @@ Classes that remain disconnected after Floyd-Warshall are assigned a distance la
 
 Before running mMDS, a power transformation can be applied to the distances. Each distance $\delta_{ij}$ is transformed into $\delta_{ij}^{p}$, where $p$ is a configurable parameter. When $p > 1$, larger distances are emphasized compared to smaller ones. When $0 < p < 1$, smaller distances are emphasized compared to larger ones.
 
-The resulting distance matrix is given to mMDS. The implementation uses the SMACOF iterative optimization proceess. It starts with random positions and updates them iteratively to reduce the difference between the target distances and the Euclidean distances between the classes. The process stops when the maximum number of iterations is reached or when the change in stress becomes smaller than the configured tolerance.
+The resulting distance matrix is given to mMDS. The implementation uses the SMACOF iterative optimization process. It starts with random positions and updates them iteratively to reduce the difference between the target distances and the Euclidean distances between the classes. The process stops when the maximum number of iterations is reached or when the change in stress becomes smaller than the configured tolerance.
 
 The result is a 2D position for each class. These positions are normalized to the range $[0,1]$ using a global minimum ($v_{\min}$) and maximum ($v_{\max}$), considering all values across both dimensions.
 
@@ -75,7 +75,7 @@ After all classes have been placed, the nodes in each footprint are converted in
 
 Once a class has been placed, its border cells are used as entry and exit points for its paths. These exits are assigned before running WFC, as they provide the constraints needed to generate paths between classes. Without these, WFC would have no information about where paths should connect to the class footprints.
 
-The exits assignment is performed in two steps. First, the algorithm computes a preference order for each path ID of each class. Second, it assigns each path ID to a specific border cell based on these preferences.
+The exits' assignment is performed in two steps. First, the algorithm computes a preference order for each path ID of each class. Second, it assigns each path ID to a specific border cell based on these preferences.
 
 \paragraph{Directional Preference Calculation}
 
@@ -124,7 +124,7 @@ After computing the preferred directions, each path is assigned to a specific bo
 
     \item Paths are first grouped by their primary preferred direction. Each group corresponds to one side of the class footprint, and paths in the same group compete for the cells available on that side. 
 
-    \item Groups with more paths are processed first, this order never change. Within each group, paths are ordered by their primary direction cost. Paths with lower costs are assigned first. This gives priority to the paths that have a stronger preference for that side when there are more paths than available cells.
+    \item Groups with more paths are processed first, this order never changes. Within each group, paths are ordered by their primary direction cost. Paths with lower costs are assigned first. This gives priority to the paths that have a stronger preference for that side when there are more paths than available cells.
 
     \item For each path in a group, its secondary direction is used to determine its position along the side. The path is assigned to the first available cell in the direction of its secondary preference. For example, if the primary direction is \textit{right} and the secondary direction is \textit{up}, the path is assigned to the highest available cell on the right side (\ie the cell with the minimum row index).
 
@@ -135,8 +135,6 @@ After computing the preferred directions, each path is assigned to a specific bo
 \end{enumerate}
 
 This approach keeps paths with similar directions close to each other and helps reduce crossings immediately after leaving the class. 
-
-\SL{Per Marco: so che non si fa, è solo per non avere tutte le immagini in fondo durante la revisione}
 
 \begin{figure}[H]
     \centering
