@@ -11,6 +11,8 @@
 \usepackage{algorithmic}
 \usepackage{float}
 \usepackage{subcaption}
+\usepackage[table]{xcolor}
+\definecolor{xcolorblue}{HTML}{EFF6FF}
 
 \usepackage{multibib}
 \newcites{bibliography}{Bibliography}
@@ -32,7 +34,7 @@
     \subfile{chapters/cha-soa/cha-soa.tex}
     \subfile{chapters/cha-approach/cha-approach.tex}
     \subfile{chapters/cha-implementation/cha-implementation.tex}
-    \subfile{chapters/cha-application.tex}
+    \subfile{chapters/cha-application/cha-application.tex}
     \subfile{chapters/cha-conclusion.tex}
 
     \appendix
@@ -43,4 +45,5 @@
     \bibliographybibliography{\subfix{references}}
     \bibliographystyleonline{unsrt}
     \bibliographyonline{\subfix{references}}
+    
 \end{document}
