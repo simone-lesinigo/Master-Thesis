@@ -12,6 +12,15 @@ The WFC implementation in \wassis follows the general process described in \secr
 
 During the observation phase of WFC, the next cell to collapse is selected as the cell with the highest entropy, as described in \subsecref{subsec:wassis_observation_phase}. Scanning the whole grid at every step would require $O(N)$ time, where $N$ is the total number of cells. To avoid this cost, \wassis uses a max binary heap containing \texttt{WSHeapEntry} objects. The root of the heap contains the cell with the highest entropy, which can be accessed in $O(1)$ time, while removing it requires $O(\log M)$ time, where $M$ is the current size of the heap.
 
+The overall process is shown in \figref{fig:heap_workflow}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.89\linewidth]{figures/implementation/heap_workflow}
+    \caption{Next cell selection workflow.}
+    \label{fig:heap_workflow}
+\end{figure}
+
 \paragraph{Initial Insertion}
 
 The heap does not initially contain all grid cells. Only cells occupied by software classes are inserted, as they are the starting points of the WFC generation. Untouched cells are not inserted because initially they all have the same set of possible tiles and therefore the same entropy.
@@ -34,7 +43,7 @@ An example of a lazy heap entry is provided in \figref{fig:lazy_entry_example}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\linewidth]{figures/implementation/lazy_entry_example}
+    \includegraphics[width=0.862\linewidth]{figures/implementation/lazy_entry_example}
     \caption{Lazy heap entry example.}
     \label{fig:lazy_entry_example}
 \end{figure}
