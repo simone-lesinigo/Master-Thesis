@@ -30,6 +30,15 @@ When the root of the heap is selected, the stored values are compared with the c
 
 The number of possible tiles is stored in addition to the entropy because some tiles have weight zero. These tiles do not contribute to the entropy calculation, therefore, entropy alone is not sufficient to determine whether a heap entry represents the current state of a node.
 
+An example of a lazy heap entry is provided in \figref{fig:lazy_entry_example}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/implementation/lazy_entry_example}
+    \caption{Lazy heap entry example.}
+    \label{fig:lazy_entry_example}
+\end{figure}
+
 \paragraph{Heap Compaction and Empty Heap Handling}
 
 The use of old heap entries means that the heap can contain entries that are no longer valid. To prevent the heap from becoming too large, after each propagation phase \wassis compares the heap size with the number of uncollapsed cells. If the heap has more than double the number of entries respect to the number of uncollapsed cells, it is rebuilt. The rebuild removes old entries and keeps only the current entries of uncollapsed cells.
