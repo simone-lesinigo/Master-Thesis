@@ -9,9 +9,7 @@ In this section, we analyze when the path generation is completed during the WFC
 
 To study this behavior, we define the \textbf{Path Completion Point} (PCP). It represents the percentage of the observation phase completed when the first empty tile is placed. More precisely, it is computed as:
 
-$$
-\frac{\text{index of the first empty tile} - 1}{\text{total number of nodes}} \times 100
-$$
+$$\frac{\text{index of the first empty tile} - 1}{\text{total number of nodes}} \times 100$$
 
 The subtraction of one gives the percentage of steps completed before the first empty tile is placed. Since WFC places one tile at each step, the total number of observation steps is equal to the number of grid cells.
 
