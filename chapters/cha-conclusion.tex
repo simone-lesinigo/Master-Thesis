@@ -5,4 +5,67 @@
 \chapter{Conclusion}
 \label{chap:conclusion}
 
+This thesis explored the use of Wave Function Collapse (WFC) for software visualization. We developed \wassis, a tool that combines Multidimensional Scaling (MDS) for class placement with WFC for generating the connections between classes. The goal was to generate compact visualizations that represent software relationships while reducing path crossings and visual clutter.
+
+The main contribution of this work is the adaptation of WFC to software visualization. Standard WFC is designed to generate locally compatible tiles, whereas software visualization requires global constraints that ensure paths connect the intended classes. To address these requirements, several changes were made to the original algorithm. The observation process was modified to control the generation of empty and path tiles by introducing a max-entropy heap. A dynamic placeholder system was developed to manage path IDs without requiring a separate tile for every possible path. Directional exits and dynamic tile weights were added to guide paths towards their targets. Finally, different backtracking strategies and a path optimization step were introduced to improve the ability of WFC to find solutions.
+
+The experiments show that these changes allow WFC to generate software visualizations while respecting the structural relationships between classes. The results also show that the settings configuration has an important effect on the generation process. For instance, path boosting can help the paths' creation, while the choice of backtracking strategy can affect the number of successful generations. Increasing the minimum distance between classes makes the problem harder, as it requires larger grids and longer paths. One of the main advantages observed in the generated layouts is path merging. Multiple relationships can share parts of the same path, reducing the number of connections in the visualization compared with drawing a separate path for each relationship.
+
+However, these advantages come with a high computational cost. Some instances require a large number of attempts and long execution times, while others cannot be solved within the given time limits.
+
+Overall, the results show that WFC can be used for software visualization when its original mechanisms are adapted to the specific requirements of this problem. \wassis implements this approach and demonstrates that WFC can be adapted to handle the global constraints required by software visualization. At the same time, the results highlight the need for further work to improve the scalability and efficiency of the approach.
+
+\section{Limitations}
+
+The main limitations of \wassis are related to execution time, scalability, and the difficulty of finding solutions when many constraints are present.
+
+The first limitation is the time required to generate a visualization. WFC explores different tile configurations, and the number of possible configurations increases as the grid becomes larger. When a valid solution is difficult to find, WFC may perform many collapses, propagations, and backtracking steps before finding one. As a result, even relatively small examples can require a long time to complete.
+
+A second limitation is the difficulty of handling multiple relationship types at the same time. When several types of relationships want to be represented, more constraints have to be satisfied. Paths have fewer possible ways to reach their targets, which can lead to more contradictions and backtracking. In some cases, no valid solution is found within the configured limits. Path merging helps reduce the number of paths that need to be generated, but this reduction is not sufficient to avoid the contradictions caused by a large number of relationships.
+
+Another limitation is the class placement process. MDS provides target positions based on the distances between classes, but these positions do not always produce a grid that is easy for WFC to solve. \wassis can increase the grid size and try different placements, but this increases the execution time and does not guarantee that a solution will be found.
+
+Finally, the evaluation was performed on selected software systems and subsets of classes. The experiments provide useful information about the behavior of \wassis, but they do not show how it performs on much larger and denser software systems. In addition, the generated layouts were mainly evaluated using visual inspection and quantitative metrics. A user study with developers would be needed to understand whether the generated visualizations actually help with software comprehension.
+
+\section{Future Work}
+
+Several ideas could be explored to address these limitations and make \wassis more efficient for larger software systems.
+
+\subsection{Performance and Scalability}
+The first set of improvements focuses on reducing the computational cost of WFC and making it possible to handle larger grids and more complex software systems:
+
+\begin{itemize}
+    \item \textbf{GPU-based Propagation:} The propagation phase could be improved by using a GPU to process several cells in parallel. When a tile collapses, the constraints of its neighbors could be checked simultaneously, reducing the time required to remove incompatible tiles. However, the propagation queue would need to be handled carefully. A parallel implementation would also need to ensure that changes to the same cell do not cause inconsistencies.
+
+    \item \textbf{Nested WFC:} Large grids could be divided into smaller subgrids, with a separate WFC instance solving each one. This idea is inspired by Nested Wave Function Collapse \cite{Nie2023a}, which applies WFC to smaller parts of a larger map. In \wassis, the main challenge would be to define the paths that cross the boundaries between subgrids. These connections would need to be assigned before or during generation so that the different subgrids remain consistent. This approach could reduce the size of each individual problem, although the division of the grid and the assignment of boundary connections would require further study.
+
+    \item \textbf{Parallel Search from Saved Checkpoints:} The current backtracking strategies decide when to save and restore checkpoints using predefined rules. A possible improvement would be to estimate how promising a checkpoint is by considering factors such as the remaining uncollapsed cells, the number of unresolved paths, and the contradictions found so far. Different WFC instances could then start from the same checkpoint and explore different choices in parallel. This could increase the chances of finding a solution.
+\end{itemize}
+
+\subsection{WFC and Layout Improvements}
+
+These improvements focus on giving WFC more flexibility during generation and improving how classes and paths are placed in the grid:
+
+\begin{itemize}
+    \item \textbf{Improved Backtracking:} During backtracking, WFC may explore configurations that are very similar to those that have already failed. This could be detected by comparing grids using edit distance or by comparing the resulting visualizations. If several failed attempts are too similar, WFC could restart the generation with a different class placement. This could reduce the time spent exploring configurations that may lead to the same contradictions.
+
+    \item \textbf{Modification of Collapsed Tiles:} In the current implementation, a collapsed tile cannot change unless the solver performs backtracking. This can cause a contradiction even when a small change to an existing path could solve the problem. For example, a path may need to connect to another path that is already represented by a straight tile. If this tile does not allow the required connection, WFC may reach a contradiction even when a crossing or a junction could provide a valid solution. Future work could allow selected collapsed tiles to be modified when new paths reach them, as long as the path IDs and adjacency constraints remain valid. This would give the solver more flexibility and could reduce unnecessary backtracking.
+
+    \item \textbf{Better Tile Configuration:} The current tile weights and path boost values are configured by the user. Future work could investigate whether these values can be adjusted automatically during generation. For example, the solver could reduce the weight of tiles that are likely to create contradictions. Results from previous generations could also be used to select suitable parameters for similar software systems. This could reduce the need for manual configuration and improve the chances of finding a solution.
+
+    \item \textbf{Improved Class Placement:} The current class placement is based on MDS and a set of placement constraints. Future work could also consider the difficulty of path generation when selecting the final positions of classes. The solver could try several candidate placements and prefer those that provide more space for paths or reduce the number of difficult connections. This could reduce the number of failed WFC attempts and increase the chances of finding a valid solution.
+\end{itemize}
+
+\subsection{Evaluation}
+
+Further work is also needed to evaluate \wassis on larger software systems and to better measure the quality of the generated visualizations.
+
+\begin{itemize}
+    \item \textbf{More Extensive Evaluation:} \wassis should be tested on larger software systems and with more types of relationships. Future experiments could compare different placement, tile weight, and backtracking strategies. The evaluation could also examine how the number of classes, relationships, and graph density affect execution time and the probability of finding a solution. This would help better understand when \wassis can be used effectively.
+
+    \item \textbf{Automatic Evaluation of Visualization:} The current evaluation mainly uses visual inspection and metrics such as path crossings, grid size, and execution time. Future work could introduce a combined quality measure based on path length, number of bends, crossings, and distance between classes. This measure could be used to compare different valid solutions and select the best one. A user study could also investigate whether the generated layouts help developers understand software relationships more easily.
+\end{itemize}
+
+Together, these improvements could help \wassis reduce generation time, handle larger and more complex software systems, and provide a better understanding of the quality of the generated visualizations.
+
 \end{document}
