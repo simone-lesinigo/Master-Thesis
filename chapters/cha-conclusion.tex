@@ -5,7 +5,7 @@
 \chapter{Conclusion}
 \label{chap:conclusion}
 
-This thesis explored the use of Wave Function Collapse (WFC) for software visualization. We developed \wassis, a tool that combines Multidimensional Scaling (MDS) for class placement with WFC for generating the connections between classes. We generated compact visualizations that represent software relationships while reducing path crossings and visual clutter.
+This thesis explored the use of Wave Function Collapse for software visualization. We developed \wassis, a tool that combines Multidimensional Scaling for class placement with WFC for generating the connections between classes. We generated compact visualizations that represent software relationships while reducing path crossings and visual clutter.
 
 The main contribution of this work is the adaptation of WFC to software visualization. Standard WFC is designed to generate locally compatible tiles, whereas software visualization requires global constraints that ensure paths connect the intended classes. To address these requirements, several changes were made to the original algorithm. The observation process was modified to control the generation of empty and path tiles by introducing a max-entropy heap. A dynamic placeholder system was developed to manage path IDs without requiring a separate tile for every possible path. Directional exits and dynamic tile weights were added to guide paths towards their targets. Finally, different backtracking strategies and a path optimization step were introduced to improve the ability of WFC to find solutions.
 
