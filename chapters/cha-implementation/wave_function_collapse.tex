@@ -25,7 +25,7 @@ The heap does not initially contain all grid cells. Only cells occupied by softw
 
 After a propagation step, the cells that were touched by propagation are added to the heap. These cells have fewer possible tiles and therefore a different entropy from untouched cells. Since WFC starts from the class cells and propagation only affects part of the grid at each step, only these cells are added to the heap, keeping its size relatively small.
 
-A cell may be affected multiple times during the same propagation phase. Inserting it into the heap after every change would result in unnecessary operations, especially since propagation is the most computationally intensive parts of WFC. Therefore, affected cells are first collected and inserted into the heap only once, after the propagation phase is complete.
+A cell may be affected multiple times during the same propagation phase. Inserting it into the heap after every change would result in unnecessary operations, especially since propagation is the most computationally intensive part of WFC. Therefore, affected cells are first collected and inserted into the heap only once, after the propagation phase is complete.
 
 \paragraph{Lazy Heap Entries}
 

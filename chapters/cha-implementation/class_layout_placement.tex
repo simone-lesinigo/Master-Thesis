@@ -75,7 +75,7 @@ After all classes have been placed, the nodes in each footprint are converted in
 
 Once a class has been placed, its border cells are used as entry and exit points for its paths. These exits are assigned before running WFC, as they provide the constraints needed to generate paths between classes. Without these, WFC would have no information about where paths should connect to the class footprints.
 
-The exits' assignment is performed in two steps. First, the algorithm computes a preference order for each path ID of each class. Second, it assigns each path ID to a specific border cell based on these preferences.
+The exit assignment is performed in two steps. First, the algorithm computes a preference order for each path ID of each class. Second, it assigns each path ID to a specific border cell based on these preferences.
 
 \paragraph{Directional Preference Calculation}
 
