@@ -64,7 +64,7 @@ This strategy takes advantage of our observation phase (\subsecref{subsec:wassis
     \item \textbf{\textbf{Random}:} No target direction is used and the tile weights are not boosted.
 \end{itemize}
 
-Note that ``black paths'' (\figref{fig:pathID_resolution}) do not have information about neither the path ID nor its target. Therefore, they are generated completely randomly.
+Note that ``black paths'' (\figref{fig:pathID_resolution}) lack information about both the path ID and its target. Therefore, they are generated completely randomly.
 
 \subsection{Reducing the Number of Crossings}
 Our approach does not explicitly minimize path crossings through a dedicated optimization step. Instead, crossings are naturally minimized during path generation by assigning them a weight of zero (\subsecref{subsec:wassis_observation_phase}). As a result, Wave Function Collapse introduces crossing tiles only when constraint propagation eliminates all the alternatives, ensuring they appear only when strictly necessary to complete a path.
