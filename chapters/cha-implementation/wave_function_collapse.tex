@@ -48,7 +48,7 @@ An example of a lazy heap entry is provided in \figref{fig:lazy_entry_example}.
 
 \paragraph{Heap Compaction and Empty Heap Handling}
 
-The use of old heap entries means that the heap can contain entries that are no longer valid. To prevent the heap from becoming too large, after each propagation phase \wassis compares the heap size with the number of uncollapsed cells. If the heap has more than double the number of entries respect to the number of uncollapsed cells, it is rebuilt. The rebuild removes old entries and keeps only the current entries of uncollapsed cells.
+The use of old heap entries means that the heap can contain entries that are no longer valid. To prevent the heap from becoming too large, after each propagation phase \wassis compares the heap size with the number of uncollapsed cells. If the heap has more than double the number of entries compared to the number of uncollapsed cells, it is rebuilt. The rebuild removes old entries and keeps only valid entries of uncollapsed cells.
 
 Finally, because cells are added to the heap only after being touched by propagation, the heap can become empty even though some cells are still uncollapsed. This can happen when the propagation step does not affect any new cell. In this case, a random uncollapsed cell is selected and added to the heap. This is valid because all cells that have never been touched have the same set of possible tiles and therefore the same entropy. The random choice allows the execution to continue until propagation reaches other cells.
 

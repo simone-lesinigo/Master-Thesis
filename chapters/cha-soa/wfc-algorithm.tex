@@ -54,7 +54,7 @@ The algorithm builds the tileset and the corresponding constraint tables. The gr
 \textbf{Observation Phase (Lines 4 and 5).}
 During the observation phase, the algorithm selects an uncollapsed cell and collapses its state from a superposition of potential tiles down to a single, definite tile. The choice of cell can be guided by various heuristics~\citebibliography{Karth2022a}. A common strategy is to select the cell with the lowest Shannon entropy, corresponding to the cell with the least uncertainty and the most constrained neighborhood. Other strategies include random selection, maximum entropy, and predefined deterministic orders such as left-to-right, spiral, or Hilbert curves.
 
-Entropy can be defined simply as the number of remaining possible tiles. However, when at each tile is assigned a weight, Shannon entropy can be used. Given a set of possible tiles with weights $w_1, \ldots, w_n$, we first define the probability $p_i$ of picking tile $i$ by normalizing its weight over the sum of all remaining weights:
+Entropy can be defined simply as the number of remaining possible tiles. However, when a weight is assigned to each tile, Shannon entropy can be used. Given a set of possible tiles with weights $w_1, \ldots, w_n$, we first define the probability $p_i$ of picking tile $i$ by normalizing its weight over the sum of all remaining weights:
 \begin{equation}
     p_i = \frac{w_i}{\sum_{j=1}^{n} w_j}
 \end{equation}

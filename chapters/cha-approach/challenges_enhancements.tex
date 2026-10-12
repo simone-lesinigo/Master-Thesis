@@ -113,7 +113,7 @@ WFC generates valid paths between classes, but these paths are not always optima
 
 \item \textbf{Direct Connections:} If the path connects two classes, Dijkstra's algorithm finds the shortest path between their border nodes.
 
-\item \textbf{Merged Paths:} If a path connects multiple classes, the algorithm builds a merged path connecting all of them. It works as follow:
+\item \textbf{Merged Paths:} If a path connects multiple classes, the algorithm builds a merged path connecting all of them. It works as follows:
 
     \begin{enumerate}
         \item \textit{Backbone Creation:} Dijkstra's algorithm is used to find the shortest path between every pair of classes. The longest path is chosen as the backbone.
