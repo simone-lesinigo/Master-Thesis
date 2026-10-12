@@ -13,29 +13,29 @@ As Thomas Ball stated:
     ``Software is intangible, having no physical shape or size.''~\citebibliography{Ball1996a}
 \end{quote}
 
-Unlike concrete objects, software has no shape that can be directly perceived. This raises a fundamental question: \emph{how can we represent something that has no physical form?} Software visualization addresses this question by mapping abstract software entities and relationships onto visual representations, making them easier to explore and understand.
-
+Unlike concrete objects, software has no shape that we can directly perceive. This raises a fundamental question: \emph{how can we represent something that has no physical form?} Software visualization addresses this question by mapping abstract software entities, such as classes, and their relationships onto visual representations that developers can explore. This thesis investigates how to place software entities and how to connect them, using Wave Function Collapse (WFC)~\citeonline{Gumin2016wfc}, a procedural content generation algorithm.
 
 \section{Context and Motivation}
 \label{sec:intro_motivation}
-Program comprehension is as old as software engineering itself. As software systems evolve and continuously grow in complexity, developers spend a significant portion of their time reading, navigating, and mentally reconstructing code structures rather than writing new features. Building and maintaining a mental model of a large codebase is a cognitive burden that affects daily software engineering tasks. An early study highlighted that program comprehension involves building an internal representation of the software by combining existing programming and domain knowledge with information obtained from source code and related documentation~\citebibliography{Von1995a}. This process is not necessarily linear: developers may start from high-level goals and previous knowledge and move towards specific implementation details, or instead build their understanding bottom-up by gradually grouping low-level code structures into higher-level concepts. During this process, they continuously formulate hypotheses about the purpose and behavior of program components, check them against the available information, and update their mental model as their understanding improves.
 
-Despite decades of improvements in integrated development environments (IDEs), new programming paradigms, and new programming languages, the amount of time developers spend trying to understand source code has remained surprisingly stable for over thirty years~\citebibliography{Sieg2016a}. As Siegmund observes, research on program comprehension went through a period of limited activity before becoming more active again in recent years. Modern research not only confirms the central role of program comprehension in software engineering, but also provides stronger empirical and physiological evidence of these cognitive processes. By using measurement techniques such as eye-tracking, electroencephalography (EEG), and functional magnetic resonance imaging (fMRI), recent studies directly measure the cognitive load associated with code understanding. These studies show that reading source code involves both language-processing and higher-level cognitive areas of the brain.
+Program comprehension is older than software engineering itself: the term \emph{software engineering} was coined at the 1968 NATO conference in Garmisch~\citebibliography{Naur1969a}, but programmers had been reading and trying to understand code long before.
 
-Empirical measurements in development environments highlight the practical impact of this cognitive overload. Investigating developers' work habits, LaToza \etal~\citebibliography{LaTo2006a} revealed that developers invest massive effort into creating and maintaining mental models of software systems, which remain most unrecorded in formal documentation. Their study identified understanding the rationale behind existing code (such as understanding design decisions, historical changes, or temporary workarounds) as the most critical problem, reported as an issue by 66\% of surveyed developers. When documentation is insufficient or code exploration is not enough, developers often turn to face-to-face discussions with their colleagues to recover missing information, causing costly task switches and interruptions for their coworkers.
+As software systems evolve and grow in complexity, developers spend a significant portion of their time reading, navigating, and mentally reconstructing code structures rather than writing new features. Understanding a codebase requires developers to build and maintain a mental model of the software, combining their existing programming and domain knowledge with information obtained from source code and related documentation~\citebibliography{Min2015a,Von1995a}. This process is not necessarily linear: developers may start from high-level goals and previous knowledge and move towards specific implementation details, or instead build their understanding bottom-up by gradually grouping low-level code structures into higher-level concepts. During this process, they continuously formulate hypotheses about the purpose and behavior of program components, check them against the available information, and update their mental model as their understanding improves.
 
-Quantifying this effort directly within the IDE, Minelli \etal~\citebibliography{Min2015a} provided empirical evidence showing that program comprehension takes up most of a developer's time. By recording more than 5 million low-level UI events during nearly 200 hours of development in Pharo, they found that program comprehension absorbs roughly 70\% of a developer's time. In comparison, active code editing takes only 5\%, while navigation accounts for about 4\%. Their study also identified another important source of cognitive load: developers spend nearly 14\% of their time interacting with and rearranging the IDE's user interface.
+Despite decades of improvements in integrated development environments (IDEs), new programming paradigms, and new programming languages, the amount of time developers spend trying to understand source code has remained surprisingly stable for over thirty years~\citebibliography{Sieg2016a}. In her review of program comprehension research, Siegmund discusses the models developed to explain how developers understand source code and highlights the renewed interest in human factors in software engineering, as well as the need for stronger empirical evidence on how developers perform their everyday tasks~\citebibliography{Sieg2016a}. Studies using techniques such as eye-tracking, electroencephalography (EEG), and functional magnetic resonance imaging (fMRI) further investigate the cognitive processes involved in code comprehension, showing that reading source code involves both language-processing and higher-level cognitive areas of the brain.
 
-To address this problem, visual modeling languages (\eg UML~\citebibliography{Andr2005a}) and software visualizations~\citebibliography{Agou2022a,Wett2007a,Kuhn2010a} have been studied over the past decades. By presenting software structure and relationships visually, these approaches can help developers explore and understand complex systems without relying only on the source code.
+Empirical studies also highlight the practical consequences of this effort. LaToza \etal~\citebibliography{LaTo2006a} found that developers invest substantial effort in creating and maintaining mental models of software systems, while much of the rationale behind existing code remains undocumented. When source code and documentation do not provide enough information, developers often turn to their colleagues to understand past design decisions, historical changes, or temporary workarounds. These interactions can interrupt both their own work and that of their coworkers. Similarly, Minelli \etal~\citebibliography{Min2015a} found that program comprehension accounts for roughly 70\% of developers' time, highlighting how much of software development involves understanding existing code rather than writing new code.
+
+These challenges motivate the use of visual representations to support program comprehension. Visual modeling languages (\eg UML~\citebibliography{Andr2005a}) and software visualizations~\citebibliography{Agou2022a,Wett2007a,Kuhn2010a} represent software structures and relationships in ways that developers can explore without relying exclusively on source code. By making these structures more explicit, visualizations can help developers understand how software entities are organized and connected. However, producing useful visualizations of large software systems is itself challenging: entities must be positioned meaningfully, and their relationships must be represented without introducing excessive visual clutter. These challenges motivate the two problems addressed in this thesis: the layout of software entities and the visualization of their connections.
 
 \section{Problem Statement}
 \label{sec-intro:problem_statement}
 However, applying software visualization to real-world, large-scale systems introduces two fundamental and interconnected challenges:
 
 \begin{itemize}
-    \item \textbf{The Layout Problem:} Given a set of software entities, one must decide how to position them meaningfully on a canvas. Different layouts can highlight different structural or semantic aspects of the software, such as inheritance relationships, package structure, or coupling. A poor layout can hide important patterns and make the overall structure of the system harder to understand.
-
-    \item \textbf{The Connectivity Problem:} While displaying relationships (\eg inheritance, method calls, and dependencies) enrich the information about how the system is connected, large software graphs can become extremely dense. As the number of entities increases, the number of connections can grow rapidly, leading to visual clutter, numerous edge crossings, and incomprehensible representations.
+    \item \textbf{The Layout Problem:} Given a set of software entities, one must decide how to position them meaningfully in a visual representation. Different layouts can highlight different structural or semantic aspects of the software, such as inheritance relationships or package structure. A poor layout can hide important patterns and make the overall structure of the system harder to understand.
+    
+    \item \textbf{The Connectivity Problem:} While displaying relationships (\eg, inheritance, method calls, and dependencies)  enriches the information about the system, large software graphs often become excessively dense. As the entity number increases, connections scale rapidly, leading to visual clutter, edge crossings, and unintelligible diagrams.
 \end{itemize}
 
 \section{Proposed Approach}
@@ -56,34 +56,46 @@ Furthermore, WFC is intrinsically non-deterministic. For a given software system
 
 \section{Contributions}
 
-The primary goal of this thesis is to investigate how Wave Function Collapse (WFC) can be adapted to generate software visualizations. The main contributions of this work are:
+The primary goal of this thesis is to investigate how Wave Function Collapse can be adapted to generate software visualizations. The main contributions of this work are:
 
 \begin{itemize}
 
-    \item \textbf{A hybrid approach for software visualization:} We propose an approach that combines Multidimensional Scaling (MDS) for placing software classes with Wave Function Collapse (WFC) for generating the connections between them. 
+    \item \textbf{Combining MDS with WFC:} We combine Multidimensional Scaling to position software classes according to their structural relationships with Wave Function Collapse to generate paths connecting the intended classes. This separates class placement from path generation while integrating both into a single visualization pipeline.
 
     \item \textbf{A method for imposing global constraints using WFC local constraints:} We show how global connectivity constraints can be imposed using only the local constraints of WFC. This allows the algorithm to generate paths that connect only the intended classes, preventing connections between unrelated classes.
 
-    \item \textbf{WFC tuning:} We present several extensions to adapt WFC to software visualization. These include multi-cell classes, maximum-entropy heuristic, directional path exits, dynamic tile weights, crossing avoidance, and backtracking strategies. Together, these changes make WFC suitable for our problem. 
+    \item \textbf{Adapting WFC to software visualization::} We present several extensions to adapt WFC to software visualization. These include multi-cell classes, maximum-entropy heuristic, directional path exits, dynamic tile weights, crossing avoidance, and backtracking strategies. Together, these changes make WFC suitable for the layout and the connectivity problem. 
 
-    \item \textbf{Prototype implementation:} We implement the proposed approach in \wassis, a prototype developed in Pharo. \wassis provides the complete pipeline from source code analysis to class placement, WFC path generation, optional path optimization, and visualization. It also includes mechanisms for backtracking, memory management, and parallel execution to support the generation process.
-
-    \item \textbf{Research paper:} Part of this work was published as a paper at VISSOFT 2026 in the NIER Track. This thesis extends that work with a more detailed description of the approach, additional WFC adaptations, implementation details, and an analysis of its characteristics and limitations.
+    \item \textbf{Tool implementation:} We implement the proposed approach in \wassis, a tool developed in Pharo. \wassis provides the complete pipeline from source code analysis to class placement, WFC path generation, optional path optimization, and visualization. It also includes mechanisms for backtracking, memory management, and parallel execution to support and optimize an efficient generation process.
 
 \end{itemize}
 
+\noindent Part of the research presented in this thesis has been peer-reviewed and accepted for publication. 
+
+\begin{center}
+\small
+    \begin{tabular}{@{}ll@{}}
+        \textbf{Title}     & Toward Using Wave Function Collapse to Depict Software Systems \\
+        \textbf{Authors}   & Simone Lesinigo, Marco Raglianti, Michele Lanza \\
+        \textbf{Booktitle}     & 14th Working Conference on Software Visualization (VISSOFT 2026) - NIER Track \\
+        \textbf{Publisher} & IEEE \\
+        \textbf{Year}      & 2026 \\
+        \textbf{Pages}     & 111--115 \\
+    \end{tabular}
+\end{center}
+
 \section{Document Structure}
-The chapters of this thesis are organized as follows:
+The thesis is organized as follows:
 
 \begin{itemize}
 
     \item \textbf{Chapter 2 - State of the Art}. This chapter reviews software visualization techniques, such as graph-based, polymetric, 3D/VR, and cartographic approaches. It also introduces the main concepts of Wave Function Collapse (WFC) and its existing applications.
 
-    \item \textbf{Chapter 3 - Approach}. This chapter presents the proposed approach, from the spatial layout of software systems using Multidimensional Scaling (MDS) to relationship merging and path generation using WFC. It also describes the main improvements introduced to handle larger systems.
+    \item \textbf{Chapter 3 - From Code to Visualization}. This chapter presents the proposed approach, from the spatial layout of software systems using Multidimensional Scaling (MDS) to relationship merging and path generation using WFC. It also describes the main improvements introduced to handle larger systems.
 
     \item \textbf{Chapter 4 - Implementation}. This chapter describes the implementation of \wassis in Pharo. It covers code parsing, class placement, path exit assignment, max-heap optimization, dynamic tile weight, backtracking, path optimization and parallel execution.
 
-    \item \textbf{Chapter 5 - Application}. This chapter shows how the proposed approach can be applied to software systems. It presents the generated visualizations and evaluates them using quantitative metrics.
+    \item \textbf{Chapter 5 - Experiments and Results}. This chapter evaluates \wassis on selected software systems. It compares the generated visualizations and investigates how different configurations affect the ability to find valid solutions and the time required for generation.
 
     \item \textbf{Chapter 6 - Conclusion}. This chapter summarizes the main findings and contributions of this work. It also discusses the current limitations and possible future works.
 
