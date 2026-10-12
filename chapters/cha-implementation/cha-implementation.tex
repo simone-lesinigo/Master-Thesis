@@ -5,11 +5,11 @@
 \chapter{Implementation}
 \label{chap:implementation}
 
-In this chapter, we present the implementation details of \wassis, our prototype developed to explore Wave Function Collapse for software system visualization.
+In this chapter, we present the implementation details of \wassis, our tool developed to explore Wave Function Collapse for software system visualization.
 
 \section{Development Environment}
 
-\wassis is implemented in Pharo~\citebibliography{Blac2009a}, a Smalltalk environment. This choice comes from the tradition of Smalltalk in software visualization and software analysis. Various tools such as \tool{Moose}~\citebibliography{Nier2005a}, \tool{CodeCity}~\citebibliography{Wett2007a}, and \tool{CodeCrawler}~\citebibliography{Lanz2003a}, were developed using Smalltalk. This makes Pharo a suitable environment for a software visualization prototype such as \wassis.
+\wassis is implemented in Pharo~\citebibliography{Blac2009a}, a Smalltalk environment. This choice comes from the tradition of Smalltalk in software visualization and software analysis. Various tools such as \tool{Moose}~\citebibliography{Nier2005a}, \tool{CodeCity}~\citebibliography{Wett2007a}, and \tool{CodeCrawler}~\citebibliography{Lanz2003a}, were developed using Smalltalk. This makes Pharo a suitable environment for a software visualization tool such as \wassis.
 
 In Pharo, everything is an object. This makes it possible to represent the main concepts of \wassis, such as grids, cells, tiles, paths, directly as objects. This keeps the implementation close to the conceptual model.
 
@@ -25,7 +25,7 @@ At the highest level, \texttt{WSAdaptiveSolver} manages the execution process an
 
 The topology is represented by \texttt{WSTopology}. It defines the structure of the graph, such as how nodes are arranged on the grid and how neighboring nodes are determined. This abstraction allows WFC to work with different grid structures, such as rectangular and hexagonal grids, without depending on a specific topology.
 
-Contradictions are handled by the \texttt{WSBacktracking} class. Different recovery strategies are implemented as separate classes following the Strategy design pattern, allowing the solver to restore a previous state or restart the execution without modifying its logic. A checkpoint of the graph state is saved using the Memento pattern.
+Contradictions are handled by the dedicated \texttt{WSBacktracking} class. Different recovery strategies are implemented as separate classes following the Strategy design pattern, allowing the solver to restore a previous consistent state or restart the execution without modifying its core logic. \clearpage A checkpoint of the graph state is saved using the Memento pattern. When a contradiction occurs, the solver uses this saved state to undo previous decisions and continue the search from an earlier point. This allows the solver to explore alternative tile assignments instead of restarting the entire process after every contradiction.
 
 After a successful WFC execution, the result is then passed to the visualization package, which uses Roassal to render the generated grid.
 
@@ -53,7 +53,7 @@ For direct connections, Dijkstra is used to find the shortest path between the b
 
 The virtual target is an additional node that does not correspond to any grid cell. A directed edge with cost zero is added from every node belonging to the current backbone to this virtual target. Dijkstra is then run from each border node of the class to the virtual target. Since reaching the virtual target has zero cost from every backbone node, the shortest path found corresponds to the shortest path from that border node to the backbone.
 
-The paths obtained from the different border nodes are compared, and the shortest one is selected.
+The paths obtained from the border nodes are compared, and the shortest is selected.
 
 \section{Memory Management}
 
@@ -67,7 +67,7 @@ The garbage collection has a small performance cost, but prevents memory usage f
 
 Pharo is a single thread environment and does not support true multithreading. This is a limitation for \wassis, since running multiple WFC generations in parallel can be useful to obtain different valid solutions and compare their metrics. It can also be used to explore different generation choices, which may lead to different valid or better-looking solutions.
 
-Since true multithreading cannot be used, \wassis uses multiple independent Pharo images to achieve parallel execution. Shell scripts are provided to start multiple instances of the same Pharo image, with each instance running an independent WFC generation. This allows multiple generations to run in parallel without requiring changes to the WFC algorithm to support multithreading.
+To overcome this limitation, \wassis uses multiple independent Pharo images to achieve parallel execution. Shell scripts are provided to start multiple instances of the same Pharo image. \clearpage Each instance runs an independent WFC generation. This allows multiple generations to run in parallel without requiring changes to the WFC algorithm to support multithreading.
 
 Two execution modes are available. In the first, all instances run until they complete. Each solution is serialized and saved in a separate folder, so it can be loaded later from another Pharo image. Serialization is implemented using Fuel~\citeonline{LeskeFuel}.
 

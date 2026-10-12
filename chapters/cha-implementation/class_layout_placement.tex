@@ -36,7 +36,7 @@ After the direct distances have been added, the Floyd-Warshall algorithm~\citebi
     \label{fig:distance-matrix}
 \end{figure}
 
-Classes that remain disconnected after Floyd-Warshall are assigned a distance larger than the graph diameter. This keeps disconnected classes farther from the others in the layout calculated by MDS.
+Classes that remain disconnected after Floyd-Warshall are assigned a distance larger than the graph diameter. This keeps disconnected classes farther from the others in the MDS layout.
 
 Before running MDS, a power transformation can be applied to the distances. Each distance $\delta_{ij}$ is transformed into $\delta_{ij}^{p}$, where $p$ is a configurable parameter. When $p > 1$, larger distances are emphasized compared to smaller ones. When $0 < p < 1$, smaller distances are emphasized compared to larger ones.
 
@@ -89,15 +89,13 @@ The algorithm compares $\mathbf{A}$ with the four directions: up $(0,1)$, down $
     \mathrm{cosineSimilarity}(\mathbf{A},\mathbf{B}) = \frac{\mathbf{A}\cdot\mathbf{B}}{|\mathbf{A}||\mathbf{B}|}.
 \end{equation}
 
-Cosine similarity measures how well a direction matches the direction towards the target. Its value ranges from $-1$ to $1$. A value close to $1$ means that the two directions are aligned, a value close to $-1$ means that they point in opposite directions, and a value of $0$ means that they are orthogonal.
-
-Since the algorithm uses costs that have to be minimized, cosine similarity is converted into a cost:
+Cosine similarity measures how well a direction matches the direction towards the target. Its value ranges from $-1$ to $1$. A value close to $1$ means that the two directions are aligned, a value close to $-1$ means that they point in opposite directions, and a value of $0$ means that they are orthogonal. Since the algorithm uses costs that have to be minimized, cosine similarity is converted into a cost:
 
 \begin{equation}
     \mathrm{cost}(\mathbf{A},\mathbf{B}) = 1-\mathrm{cosineSimilarity}(\mathbf{A},\mathbf{B}).
 \end{equation}
 
-Therefore:
+\noindent Therefore:
 
 \begin{itemize}
     \item $\mathrm{cost}=0$ represents a perfect alignment ($\mathrm{cosineSimilarity}=1$);
