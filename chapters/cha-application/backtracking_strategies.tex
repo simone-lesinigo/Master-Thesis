@@ -46,7 +46,7 @@ The boxplots in \figref{fig:backtracking_boxplot} show the execution times, whil
 
 The results are similar for the five strategies, but the \textbf{Restart} strategy solved the most instances and generally found solutions faster.
 
-One possible reason is the size of the tested system. For a class hierarchy such as \texttt{HashedCollection}, a contradiction can be caused by an early class placement that makes the rest of the grid difficult to solve. In this case, going back step by step may spend time trying to fix a layout that is already difficult to solve.
+One possible reason is the small size of the tested system. For a class hierarchy such as \texttt{HashedCollection}, a contradiction can be caused by an early class placement that makes the rest of the grid difficult to solve. In this case, going back step by step may spend time trying to fix a layout that is already difficult to solve.
 
 With \textbf{Restart}, the solver can discard this layout and try a new class placement immediately. For this relatively small system, starting again has a low cost.
 

@@ -5,7 +5,7 @@
 
 \section{Wave Function Collapse}
 
-The WFC implementation in \wassis follows the general process described in \secref{sec:soa_wfc}, but introduces some implementation mechanisms to improve the efficiency of the path generation process. This section describe these mechanisms, including heap management, dynamic tile weights, path ID resolution, constraint propagation, and backtracking.
+The WFC implementation in \wassis follows the general process described in \secref{sec:soa_wfc}, but introduces some implementation mechanisms to improve the efficiency of the path generation process. This section describes these mechanisms, including heap management, dynamic tile weights, path ID resolution, constraint propagation, and backtracking.
 
 \subsection{Heap Management}
 \label{subsec:heap_management}
@@ -94,7 +94,7 @@ The propagation process keeps track of all nodes whose possible tiles have chang
 \subsection{Backtracking}
 To make backtracking possible, the state of the grid must be saved at different points during the generation. The \texttt{WSBacktracking} class decides when to create a checkpoint depending on the selected backtracking strategy. The checkpoint is evaluated after a cell has been selected for collapse but before a tile is actually chosen. This allows the checkpoint to represent the exact state from which the current decision is made. If the decision later leads to a contradiction, the state can be restored and the tile originally selected at that decision point can be removed from the cell's possible tiles before collapsing it again.
 
-The initial implementation used a deep copy of the \texttt{WSGraph} object. However, this was very expensive and had a significant impact on performance. To avoid copying the entire object, the Memento pattern was used. The \texttt{WSGraph} and \texttt{WSNode} classes provide methods to create snapshots of their current state, represented by \texttt{WSGraphSnapshot} and \texttt{WSNodeSnapshot}. These snapshots store only the mutable state needed to restore the current state. A \texttt{WSGraphSnapshot} contains the snapshots of its nodes and a copy of the heap, reducing the cost of saving checkpoints.  \clearpage  It is then stored in a \texttt{WSCheckpoint} with other information (\eg a timestamp), while \texttt{WSBacktracking} keeps the collection of available checkpoints.
+The initial implementation used a deep copy of the \texttt{WSGraph} object. However, this was very expensive and had a significant impact on performance. To avoid copying the entire object, the Memento pattern was used. The \texttt{WSGraph} and \texttt{WSNode} classes provide methods to create snapshots of their current state, represented by \texttt{WSGraphSnapshot} and \texttt{WSNodeSnapshot}. These snapshots store only the mutable state needed to restore the current state. A \texttt{WSGraphSnapshot} contains the snapshots of its nodes and a copy of the heap, reducing the cost of saving checkpoints.  \clearpage  It is then stored in a \texttt{WSCheckpoint} along with other information (\eg a timestamp), while \texttt{WSBacktracking} keeps the collection of available checkpoints.
 
 When a checkpoint has to be restored, \texttt{WSBacktracking} asks the \texttt{WSGraph} to restore its state from the corresponding snapshot. This approach avoids the expensive deep copy of the whole graph and improves performance at the cost of additional memory for the stored snapshots.
 

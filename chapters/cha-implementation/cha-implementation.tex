@@ -40,7 +40,7 @@ After a successful WFC execution, the result is then passed to the visualization
 
 The source code parsing is performed using \tool{ZION}, a tool developed within the REVEAL Research Group by Giannaccari~\etal~\citebibliography{Gian2026a}. \tool{ZION} uses CodeQL~\citeonline{CodeQL} to extract software entities, relationships, and properties from a source code repository. The extracted data is stored in a JSON file.
 
-\wassis uses \tool{ZION}'s domain model to load this data and access the extracted entities and relationships. These are then mapped to the internal representation used by \wassis. A \texttt{WSSoftwareSystem} contains the classes of the analyzed system, represented as \texttt{WSClass} objects. Each class stores its incoming and outgoing relationships, which represent its dependencies on other classes. This representation provides the information required by the layout and path generation phases, so the resulting model is used as input for the WFC algorithm.
+\wassis uses \tool{ZION}'s domain model to load the data and access its entities and relationships. These are then mapped to the internal representation used by \wassis. A \texttt{WSSoftwareSystem} contains the classes of the analyzed system, represented as \texttt{WSClass} objects. Each class stores its incoming and outgoing relationships, which represent its dependencies on other classes. This representation provides the information required by the layout and path generation phases, so the resulting model is used as input for the WFC algorithm.
 
 \subfile{class_layout_placement.tex}
 \subfile{wave_function_collapse.tex}
