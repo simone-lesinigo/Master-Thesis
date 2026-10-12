@@ -12,6 +12,14 @@ Since its introduction by Gumin~\citeonline{Gumin2016wfc}, Wave Function Collaps
 
 Karth and Smith~\citebibliography{Karth2022a} provided a formal description of the WFC algorithm. They studied different strategies for cells and tiles selection, as well as the use of backtracking and global constraints. Their results showed that these choices can significantly affect both the generation process and the final output. In particular, they showed that the restart from scratch strategy used in Gumin's original implementation works well with simple local rules, but becomes less effective when global constraints are introduced. In such cases, the number of contradictions increases significantly, making backtracking essential.
 
+\paragraph{Global Constraints.}
+
+Standard Wave Function Collapse relies on local neighbor rules, making it hard to control patterns across multiple cells or the entire map. Sandhu~\etal~\citebibliography{Sandh2019a} expanded WFC by adding non-local and design-level constraints, such as minimum and maximum item limits, tile dependencies, and changing weights dynamically during generation. These improvements allow the algorithm to follow global design requirements.
+
+\paragraph{Designer Control.}
+
+Langendam and Bidarra~\citebibliography{Lang2022a} focused instead on giving designers more direct control over the generation process. Their \emph{miWFC} introduces interactive tools for directly editing the output. A pencil tool allows users to select a cell and manually collapsing it to a tile, while a brush tool allows them to select areas to reset or preserve. Users can also define templates from an area of the output and place them multiple times in different locations or generations.
+
 \paragraph{Game Development.}
 
 WFC has been widely used in game development for environment and level generation. Parker and Jones used it in \emph{Proc Skater 2016}~\citeonline{ParkerProcSkater} to generate unique skateboard parks. Stålberg used WFC in \emph{Bad North}~\citeonline{StalbergBadNorth} to generate 3D islands and in \emph{Townscaper}~\citeonline{StalbergTownscaper} to turn player clicks into coherent buildings. Kleineberg~\citeonline{KleinebergInfiniteCity} created \emph{Infinite City}, a game that generates a city as the player explores it. Examples are shown in \figref{fig:wfc_game_development}.
@@ -54,24 +62,20 @@ WFC has been widely used in game development for environment and level generatio
 
 \end{figure}
 
-\paragraph{Global Constraints.}
-
-Standard Wave Function Collapse relies on local neighbor rules, making it hard to control patterns across multiple cells or the entire map. Sandhu~\etal~\citebibliography{Sandh2019a} expanded WFC by adding non-local and design-level constraints, such as minimum and maximum item limits, tile dependencies, and changing weights dynamically during generation. These improvements allow the algorithm to follow global design requirements.
-
 \paragraph{Graph-based WFC.}
 
 Original WFC operates on a square grid. Kim~\etal~\citebibliography{Kim2019a} extended WFC to graphs, allowing it to work with structures where nodes can have a different number of neighbors. They applied their graph-based WFC to problems such as Sudoku and the Voronoi graph 4-coloring problem, as shown in \figref{fig:graph_wfc}.
 
 \begin{figure}[ht]
     \centering
-    \begin{subfigure}[b]{0.85\linewidth}
+    \begin{subfigure}[b]{\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figures/soa/sudoku}
         \caption{Sudoku}
         \label{fig:sudoku}
     \end{subfigure}
 
-    \begin{subfigure}[b]{0.85\linewidth}
+    \begin{subfigure}[b]{\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figures/soa/voronoi}
         \caption{Voronoi graph 4-coloring}
@@ -83,14 +87,10 @@ Original WFC operates on a square grid. Kim~\etal~\citebibliography{Kim2019a} ex
 
 Kim~\etal~\citebibliography{Kim2025a} later adapted this approach for procedural level generation in logic puzzle games. They applied WFC to \emph{Strimko} and \emph{Flow} puzzles, showing that it can generate levels that satisfy the constraints of these games faster than depth-first search and genetic algorithms.
 
-\paragraph{Designer Control.}
-
-Langendam and Bidarra~\citebibliography{Lang2022a} focused instead on giving designers more direct control over the generation process. Their \emph{miWFC} introduces interactive tools for directly editing the output. A pencil tool allows users to select a cell and manually collapsing it to a tile, while a brush tool allows them to select areas to reset or preserve. Users can also define templates from an area of the output and place them multiple times in different locations or generations.
-
 \paragraph{Scalability.}
 
 Another limitation of standard WFC is the cost of generating large outputs. 
-To fix this issue, Nie~\etal~\citebibliography{Nie2023a} introduced Nested Wave Function Collapse (\emph{N-WFC}), which splits a large map into a grid of smaller subgrids. Instead of solving the whole map at once, smaller WFC instances generate these subgrids step by step while matching edges with neighboring blocks. This reduces computation time from exponential to linear or polynomial, avoiding heavy backtracking and making it easy to create very large or infinite game worlds.
+To fix this issue, Nie~\etal~\citebibliography{Nie2023a} introduced Nested Wave Function Collapse (\emph{N-WFC}), which splits a large map into a grid of smaller subgrids. Instead of solving the whole map at once, smaller WFC instances generate these subgrids step by step while matching edges with neighboring blocks. This decomposition allows each subgrid to be processed independently, reducing the size of the individual problems. This reduces computation time from exponential to linear or polynomial, avoiding heavy backtracking and making it easy to create very large or infinite game worlds.
 
 \paragraph{Non-Uniform Tiles.}
 
