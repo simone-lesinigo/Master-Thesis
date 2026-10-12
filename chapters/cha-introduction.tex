@@ -13,7 +13,7 @@ As Thomas Ball stated:
     ``Software is intangible, having no physical shape or size.''~\citebibliography{Ball1996a}
 \end{quote}
 
-Unlike concrete objects, software has no shape that we can directly perceive. This raises a fundamental question: \emph{how can we represent something that has no physical form?} Software visualization addresses this question by mapping abstract software entities, such as classes, and their relationships onto visual representations that developers can explore. This thesis investigates how to place software entities and how to connect them, using Wave Function Collapse (WFC)~\citeonline{Gumin2016wfc}, a procedural content generation algorithm.
+Unlike concrete objects, software has no shape that we can directly perceive. This raises a fundamental question: \emph{how can we represent something that has no physical form}? Software visualization addresses this question by mapping abstract software entities, such as classes, and their relationships onto visual representations that developers can explore. This thesis investigates how to place software entities and how to connect them, using Wave Function Collapse (WFC)~\citeonline{Gumin2016wfc}, a procedural content generation algorithm.
 
 \section{Context and Motivation}
 \label{sec:intro_motivation}
@@ -24,24 +24,24 @@ As software systems evolve and grow in complexity, developers spend a significan
 
 Despite decades of improvements in integrated development environments (IDEs), new programming paradigms, and new programming languages, the amount of time developers spend trying to understand source code has remained surprisingly stable for over thirty years~\citebibliography{Sieg2016a}. In her review of program comprehension research, Siegmund discusses the models developed to explain how developers understand source code and highlights the renewed interest in human factors in software engineering, as well as the need for stronger empirical evidence on how developers perform their everyday tasks~\citebibliography{Sieg2016a}. Studies using techniques such as eye-tracking, electroencephalography (EEG), and functional magnetic resonance imaging (fMRI) further investigate the cognitive processes involved in code comprehension, showing that reading source code involves both language-processing and higher-level cognitive areas of the brain.
 
-Empirical studies also highlight the practical consequences of this effort. LaToza \etal~\citebibliography{LaTo2006a} found that developers invest substantial effort in creating and maintaining mental models of software systems, while much of the rationale behind existing code remains undocumented. When source code and documentation do not provide enough information, developers often turn to their colleagues to understand past design decisions, historical changes, or temporary workarounds. These interactions can interrupt both their own work and that of their coworkers. Similarly, Minelli \etal~\citebibliography{Min2015a} found that program comprehension accounts for roughly 70\% of developers' time, highlighting how much of software development involves understanding existing code rather than writing new code.
+Empirical studies also highlight the practical consequences of this effort. LaToza \etal~\citebibliography{LaTo2006a} found that developers invest substantial effort in creating and maintaining mental models of software systems, while much of the rationale behind existing code remains undocumented. When source code and documentation do not provide enough information, developers often turn to their colleagues to understand past design decisions, historical changes, or temporary workarounds. These interactions can interrupt both their own work and that of their coworkers, reducing overall productivity. Similarly, Minelli \etal~\citebibliography{Min2015a} found that program comprehension accounts for roughly 70\% of developers' time, highlighting how much of software development involves understanding existing code rather than writing new code.
 
-These challenges motivate the use of visual representations to support program comprehension. Visual modeling languages (\eg UML~\citebibliography{Andr2005a}) and software visualizations~\citebibliography{Agou2022a,Wett2007a,Kuhn2010a} represent software structures and relationships in ways that developers can explore without relying exclusively on source code. By making these structures more explicit, visualizations can help developers understand how software entities are organized and connected. However, producing useful visualizations of large software systems is itself challenging: entities must be positioned meaningfully, and their relationships must be represented without introducing excessive visual clutter. These challenges motivate the two problems addressed in this thesis: the layout of software entities and the visualization of their connections.
+These challenges motivate the use of visual representations to support program comprehension. Visual modeling languages (\eg UML~\citebibliography{Andr2005a}) and software visualizations~\citebibliography{Agou2022a,Wett2007a,Kuhn2010a} represent software structures and relationships in ways that developers can explore without relying exclusively on source code. By making these structures more explicit, visualizations can help developers understand how software entities are organized and connected. However, producing useful visualizations of large software systems is itself challenging: entities must be positioned meaningfully, and their relationships must be represented without introducing excessive visual clutter.
 
 \section{Problem Statement}
 \label{sec-intro:problem_statement}
-However, applying software visualization to real-world, large-scale systems introduces two fundamental and interconnected challenges:
+Applying software visualization to real-world, large-scale systems introduces two fundamental and interconnected challenges:
 
 \begin{itemize}
-    \item \textbf{The Layout Problem:} Given a set of software entities, one must decide how to position them meaningfully in a visual representation. Different layouts can highlight different structural or semantic aspects of the software, such as inheritance relationships or package structure. A poor layout can hide important patterns and make the overall structure of the system harder to understand.
+    \item \textbf{The Layout Problem:} Given a set of software entities, one must decide how to position them meaningfully in the visual representation. Different layouts can highlight different structural or semantic aspects of the software, such as inheritance relationships or package structure. A poor layout can hide important patterns and make the overall structure of the system harder to understand.
     
     \item \textbf{The Connectivity Problem:} While displaying relationships (\eg, inheritance, method calls, and dependencies)  enriches the information about the system, large software graphs often become excessively dense. As the entity number increases, connections scale rapidly, leading to visual clutter, edge crossings, and unintelligible diagrams.
 \end{itemize}
 
 \section{Proposed Approach}
-In this thesis, we explore a novel approach designed to tackle both problems. The approach is implemented in \wassis, a prototype developed in Pharo that combines Multidimensional Scaling (MDS) for class placement with Wave Function Collapse for path generation.
+In this thesis, we explore a novel approach designed to tackle both problems. The approach is implemented in \wassis, a tool developed in Pharo that combines Multidimensional Scaling (MDS) for class placement with Wave Function Collapse for path generation. This combination aims to produce layouts that are both structurally informative and easy to interpret.
 
-First, we use Multidimensional Scaling~\citebibliography{Torg1952a,Doug1998a}, a dimensionality reduction technique, to establish the placement of software entities on the canvas according to their structural relationships.
+First, we use Multidimensional Scaling~\citebibliography{Torg1952a,Doug1998a}, a dimensionality reduction technique, to establish the placement of software entities on the canvas according to their structural relationships, aiming to position related entities closer to each other.
 
 Second, to address the connectivity problem, we leverage WFC~\citeonline{Gumin2016wfc}, a procedural generation algorithm inspired by quantum mechanics. WFC generates coherent tile-based structures by propagating \emph{local constraints} across a \emph{grid} of \emph{cells}. In our approach, the tiles represent small segments of the paths connecting software entities. WFC generates these paths by selecting a tile for each cell and propagating the constraints imposed by neighboring tiles. By combining a sequence of compatible tiles, complete paths can be generated while respecting the required connections between software entities. Since constraints are defined at the \emph{tile} level (\ie specifying which elements can be placed in adjacent cells), WFC provides fine-grained control over the generated connections. This allows us to reduce visual clutter, such as overlapping lines, by restricting the set of possible tiles and adjusting their probabilities.
 
@@ -62,7 +62,7 @@ The primary goal of this thesis is to investigate how Wave Function Collapse can
 
     \item \textbf{Combining MDS with WFC:} We combine Multidimensional Scaling to position software classes according to their structural relationships with Wave Function Collapse to generate paths connecting the intended classes. This separates class placement from path generation while integrating both into a single visualization pipeline.
 
-    \item \textbf{A method for imposing global constraints using WFC local constraints:} We show how global connectivity constraints can be imposed using only the local constraints of WFC. This allows the algorithm to generate paths that connect only the intended classes, preventing connections between unrelated classes.
+    \item \textbf{A method for imposing global constraints using WFC local constraints:} We show how global connectivity constraints can be imposed using only the local constraints of WFC. This allows the algorithm to generate paths that connect only the intended classes, preventing connections between unrelated classes and preserving the intended dependency relationships throughout the visualization.
 
     \item \textbf{Adapting WFC to software visualization::} We present several extensions to adapt WFC to software visualization. These include multi-cell classes, maximum-entropy heuristic, directional path exits, dynamic tile weights, crossing avoidance, and backtracking strategies. Together, these changes make WFC suitable for the layout and the connectivity problem. 
 
@@ -77,7 +77,7 @@ The primary goal of this thesis is to investigate how Wave Function Collapse can
     \begin{tabular}{@{}ll@{}}
         \textbf{Title}     & Toward Using Wave Function Collapse to Depict Software Systems \\
         \textbf{Authors}   & Simone Lesinigo, Marco Raglianti, Michele Lanza \\
-        \textbf{Booktitle}     & 14th Working Conference on Software Visualization (VISSOFT 2026) - NIER Track \\
+        \textbf{Booktitle}     & 14th Working Conference on Software Visualization (VISSOFT) - NIER Track \\
         \textbf{Publisher} & IEEE \\
         \textbf{Year}      & 2026 \\
         \textbf{Pages}     & 111--115 \\
