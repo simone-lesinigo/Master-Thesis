@@ -9,7 +9,7 @@
 
 In the previous sections, we explained why we use a \textbf{max-heap} during the WFC observation phase. Empty tiles have higher weights than path tiles. So, as path cells have an higher entropy, with a max-heap they are selected first. This allows paths to be generated before the empty tiles occupy the whole grid, removing space for paths.
 
-Standard WFC implementations usually use a \textbf{min-heap}, which selects the cells with the lowest entropy first. In our case, this means that empty tiles are selected before path tiles. This produces a curious behavior: sometimes, instead of blocking the paths, the empty tiles can help guide them.
+Standard WFC implementations usually use a \textbf{min-heap}, which selects the cells with the lowest entropy first. In our case, this means that empty tiles are selected before path tiles. This produces an interesting behavior: sometimes, instead of blocking the paths, the empty tiles can help guide them.
 
 \subsection{How Min-Heap Can Guide Paths}
 

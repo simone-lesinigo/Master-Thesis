@@ -79,7 +79,7 @@ The exits' assignment is performed in two steps. First, the algorithm computes a
 
 \paragraph{Directional Preference Calculation}
 
-For each path ID in the system, the algorithm computes a target position as the centroid of all classes connected by that path ID. For this calculus, the position of a class is defined as the center of its footprint. If the footprint has an even side length, one of its four central cells is selected at random.
+For each path ID in the system, the algorithm computes a target position as the centroid of all classes connected by that path ID. For this calculation, the position of a class is defined as the center of its footprint. If the footprint has an even side length, one of its four central cells is selected at random.
 
 Then, for each path ID of each class, a vector $\mathbf{A}$ is computed from the center of the class to the target position of the path ID. This vector represents the ideal direction in which the path should leave the class.
 
