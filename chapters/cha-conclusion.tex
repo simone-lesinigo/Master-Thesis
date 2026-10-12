@@ -5,15 +5,17 @@
 \chapter{Conclusion}
 \label{chap:conclusion}
 
-This thesis explored the use of Wave Function Collapse (WFC) for software visualization. We developed \wassis, a tool that combines Multidimensional Scaling (MDS) for class placement with WFC for generating the connections between classes. The goal was to generate compact visualizations that represent software relationships while reducing path crossings and visual clutter.
+This thesis explored the use of Wave Function Collapse (WFC) for software visualization. We developed \wassis, a tool that combines Multidimensional Scaling (MDS) for class placement with WFC for generating the connections between classes. We generated compact visualizations that represent software relationships while reducing path crossings and visual clutter.
 
 The main contribution of this work is the adaptation of WFC to software visualization. Standard WFC is designed to generate locally compatible tiles, whereas software visualization requires global constraints that ensure paths connect the intended classes. To address these requirements, several changes were made to the original algorithm. The observation process was modified to control the generation of empty and path tiles by introducing a max-entropy heap. A dynamic placeholder system was developed to manage path IDs without requiring a separate tile for every possible path. Directional exits and dynamic tile weights were added to guide paths towards their targets. Finally, different backtracking strategies and a path optimization step were introduced to improve the ability of WFC to find solutions.
 
-The experiments show that these changes allow WFC to generate software visualizations while respecting the structural relationships between classes. The results also show that the settings configuration has an important effect on the generation process. For instance, path boosting can help the paths' creation, while the choice of backtracking strategy can affect the number of successful generations. Increasing the minimum distance between classes makes the problem harder, as it requires larger grids and longer paths. One of the main advantages observed in the generated layouts is path merging. Multiple relationships can share parts of the same path, reducing the number of connections in the visualization compared with drawing a separate path for each relationship.
+The experiments show that these changes allow WFC to generate software visualizations while respecting the structural relationships between classes. The results also show that the settings configuration has an important effect on the generation process. For instance, path boosting can help the paths' creation, while the choice of backtracking strategy can affect the number of successful generations. Increasing the minimum distance between classes makes the problem harder, as it requires larger grids and longer paths. 
+
+A key advantage is the way class placement and path generation work together. MDS provides initial positions for the classes, while WFC determines how to connect them on the grid. This combination allows the layout and the connections to be considered together, rather than treating them as independent steps. Path merging is a further benefit, as multiple relationships can share parts of the same path, reducing visual clutter, compared with drawing a separate path for each relationship.
 
 However, these advantages come with a high computational cost. Some instances require a large number of attempts and long execution times, while others cannot be solved within the given time limits.
 
-Overall, the results show that WFC can be used for software visualization when its original mechanisms are adapted to the specific requirements of this problem. \wassis implements this approach and demonstrates that WFC can be adapted to handle the global constraints required by software visualization. At the same time, the results highlight the need for further work to improve the scalability and efficiency of the approach.
+Overall, our results show that WFC can be used for software visualization when its original mechanisms are adapted to the specific requirements of this problem. \wassis implements this approach and demonstrates that WFC can be adapted to handle the global constraints required by software visualization. At the same time, we highlight the need further work to improve the scalability and efficiency of our approach.
 
 \section{Limitations}
 
@@ -29,7 +31,7 @@ Finally, the evaluation was performed on selected software systems and subsets o
 
 \section{Future Work}
 
-Several ideas could be explored to address these limitations and make \wassis more efficient for larger software systems.
+Several ideas could be explored to address current limitations and make the approach more efficient for larger software systems.
 
 \subsection{Performance and Scalability}
 The first set of improvements focuses on reducing the computational cost of WFC and making it possible to handle larger grids and more complex software systems:
@@ -58,7 +60,7 @@ These improvements focus on giving WFC more flexibility during generation and im
 
 \subsection{Evaluation}
 
-Further work is also needed to evaluate \wassis on larger software systems and to better measure the quality of the generated visualizations.
+Further work is also needed to evaluate the approach on larger software systems and to better measure the quality of the generated visualizations.
 
 \begin{itemize}
     \item \textbf{More Extensive Evaluation:} \wassis should be tested on larger software systems and with more types of relationships. Future experiments could compare different placement, tile weight, and backtracking strategies. The evaluation could also examine how the number of classes, relationships, and graph density affect execution time and the probability of finding a solution. This would help better understand when \wassis can be used effectively.

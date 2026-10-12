@@ -23,23 +23,31 @@ All experiments were performed on a Linux server equipped with two Intel Xeon E5
 
 \subfile{path_generation_analysis.tex}
 
+% \section{Summary}
+
+% This chapter evaluated different aspects of \wassis through a series of experiments. The main findings are summarized below.
+
+%     \begin{itemize}
+%     \item \textbf{Visual comparison:} \wassis produces compact star layouts that use space in multiple directions. Path merging is one of its main advantages, as it reduces visual clutter. The main limitation is the generation time. \plantuml generates diagrams almost instantly, but it draws a separate arrow for each relationship. As a result, arrows can easily overlap, increasing visual clutter and reducing readability.
+
+%     \item \textbf{Class distance and Path Boost:} Increasing the minimum distance between classes makes WFC harder to solve, as larger distances require larger grids and longer paths. This leads to longer execution times and fewer successful runs. Path Boost helps guide paths toward their target classes. Without it, no valid solution was found in the tested instances, while valid solutions were found when Path Boost was enabled.
+
+%     \item \textbf{Heap selection:} The experiments showed that a min-heap can also help path generation when the layout allows it. By filling empty tiles first, it leaves narrow areas between classes where paths can form. This can guide paths even without Path Boost.
+
+%     \item \textbf{Backtracking:} Five backtracking strategies were tested. Restart solved 87.5\% of the tested instances and generally found solutions quickly. This suggests that, for the small systems used in this experiment, restarting can be effective when the initial class placement leads to a difficult layout to solve.
+
+%     \item \textbf{Path Completion Point (PCP):} The PCP is the percentage of WFC observation steps completed before the first empty tile is placed. Since WFC places one tile at each step, this value indicates how early path generation is completed. Across 193 instances, the average PCP was about 20\%, meaning that path generation was usually completed during the first part of the WFC generation. Lower PCP values were generally associated with shorter and more direct paths. However, PCP showed only a very weak positive correlation with execution time ($\rho = 0.23$), so a lower PCP did not necessarily mean faster generation.
+
+%     \end{itemize}
+
+% Overall, \wassis can produce compact software visualizations. However, the main limitations are execution time and the size of the software system that can be visualized. The experiments also show that configuration choices can have a strong effect on the ability of WFC to find a valid solution.
+
 \section{Summary}
 
-This chapter evaluated different aspects of \wassis through a series of experiments. The main findings are summarized below.
+This chapter evaluated \wassis through experiments on software class hierarchies and systems with multiple types of relationships. The results show that \wassis can produce compact visualizations with less visual clutter through path merging, although class names are not displayed directly and generation can be computationally expensive.
 
-    \begin{itemize}
-    \item \textbf{Visual comparison:} \wassis produces compact star layouts that use space in multiple directions. Path merging is one of its main advantages, as it reduces visual clutter. The main limitation is the generation time. \plantuml generates diagrams almost instantly, but it draws a separate arrow for each relationship. As a result, arrows can easily overlap, increasing visual clutter and reducing readability.
+The experiments also showed that the ability of WFC to find valid solutions depends strongly on the configuration. Increasing the minimum distance between classes makes the problem harder to solve, while path boost helps guide paths towards their targets. The choice of heap and backtracking strategy can also affect the generation process. Finally, the Path Completion Point (PCP) provides insight into how paths are generated and how efficiently they use the available grid space, although it does not reliably predict execution time.
 
-    \item \textbf{Class distance and Path Boost:} Increasing the minimum distance between classes makes WFC harder to solve, as larger distances require larger grids and longer paths. This leads to longer execution times and fewer successful runs. Path Boost helps guide paths toward their target classes. Without it, no valid solution was found in the tested instances, while valid solutions were found when Path Boost was enabled.
-
-    \item \textbf{Heap selection:} The experiments showed that a min-heap can also help path generation when the layout allows it. By filling empty tiles first, it leaves narrow areas between classes where paths can form. This can guide paths even without Path Boost.
-
-    \item \textbf{Backtracking:} Five backtracking strategies were tested. Restart solved 87.5\% of the tested instances and generally found solutions quickly. This suggests that, for the small systems used in this experiment, restarting can be effective when the initial class placement leads to a difficult layout to solve.
-
-    \item \textbf{Path Completion Point (PCP):} The PCP is the percentage of WFC observation steps completed before the first empty tile is placed. Since WFC places one tile at each step, this value indicates how early path generation is completed. Across 193 instances, the average PCP was about 20\%, meaning that path generation was usually completed during the first part of the WFC generation. Lower PCP values were generally associated with shorter and more direct paths. However, PCP showed only a very weak positive correlation with execution time ($\rho = 0.23$), so a lower PCP did not necessarily mean faster generation.
-
-    \end{itemize}
-
-Overall, \wassis can produce compact software visualizations. However, the main limitations are execution time and the size of the software system that can be visualized. The experiments also show that configuration choices can have a strong effect on the ability of WFC to find a valid solution.
+Overall, the experiments demonstrate the potential of \wassis for producing compact software visualizations, while highlighting execution time and scalability as important limitations. These findings provide a basis for discussing the contributions of this work, its limitations, and possible directions for future research in the next chapter.
 
 \end{document}

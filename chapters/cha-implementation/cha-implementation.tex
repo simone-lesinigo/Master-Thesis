@@ -77,18 +77,26 @@ This approach provides parallel execution while keeping each WFC generation sing
 
 \subfile{tool.tex}
 
+% \section{Summary}
+
+% This chapter presented the implementation of \wassis, a Pharo prototype for generating software visualizations using the approach described in \chapref{chap:approach}. The implementation is organized into a core package containing the model and algorithms and a visualization package responsible for rendering the results with Roassal. The main execution is managed by a solver, which performs independent WFC executions and increases the grid size when a valid solution cannot be found.
+
+% The implementation uses the software system model produced by ZION~\citebibliography{Gian2026a}, which performs the parsing and analysis of the source code to extract classes and their relationships. These entities are mapped to the internal representation of \wassis. Class placement is implemented using Multidimensional Scaling, followed by a mapping from continuous coordinates to grid positions. Classes are represented using square footprints, whose size is determined by their number of connections. Before WFC starts, the border cells of each footprint are assigned to paths according to their preferred directions, computed using cosine similarity.
+
+% The WFC solver introduces various mechanisms to improve performance and making path generation possible. A max-heap is used to efficiently select the cell with the highest entropy, while lazy heap entries and heap compaction reduce the cost of updating the heap during propagation. Placeholder tiles are dynamically resolved during generation to avoid requiring a tile for every possible path. Dynamic tile weights guide paths toward their targets.
+
+% Contradictions are handled through backtracking strategies implemented using the Strategy pattern, allowing different recovery strategies to be selected without changing the solver. Checkpoints store only the mutable state needed to restore the grid, using the Memento pattern instead of expensive deep copies. \wassis also provides an optional path optimization step based on Dijkstra's algorithm, which can improve direct and merged paths after WFC generation.
+
+% Finally, garbage collection is performed after failed attempts that require grid expansion to prevent memory usage from growing across generations. Since Pharo does not support true multithreading, \wassis runs multiple independent Pharo images to generate solutions in parallel.
+
+% The implementation also includes a user interface that allows users to configure the generation, select the input system, and inspect the generated visualization. The tool provides additional views, including the step-by-step WFC animation, metrics dashboard, system graph, classes distance matrix, and MDS placement. These views support both the inspection of the generated solution and the analysis of the generation process.
+
 \section{Summary}
 
-This chapter presented the implementation of \wassis, a Pharo prototype for generating software visualizations using the approach described in \chapref{chap:approach}. The implementation is organized into a core package containing the model and algorithms and a visualization package responsible for rendering the results with Roassal. The main execution is managed by a solver, which performs independent WFC executions and increases the grid size when a valid solution cannot be found.
+This chapter presented the implementation of \wassis, a Pharo tool that applies the approach described in the previous chapter to software system visualization. The implementation combines class placement, path generation, and visualization in a single tool, using the software model extracted by ZION as input.
 
-The implementation uses the software system model produced by ZION~\citebibliography{Gian2026a}, which performs the parsing and analysis of the source code to extract classes and their relationships. These entities are mapped to the internal representation of \wassis. Class placement is implemented using Multidimensional Scaling, followed by a mapping from continuous coordinates to grid positions. Classes are represented using square footprints, whose size is determined by their number of connections. Before WFC starts, the border cells of each footprint are assigned to paths according to their preferred directions, computed using cosine similarity.
+A key implementation challenge was making WFC practical for path generation. The solver includes mechanisms to manage cell selection efficiently, resolve path identifiers during generation, guide paths towards their targets, and recover from contradictions. Additional mechanisms address memory usage and allow multiple independent generations to run in parallel. The tool also provides an interface for configuring the algorithm, inspecting the generated visualizations, and examining the generation process through additional views and metrics.
 
-The WFC solver introduces various mechanisms to improve performance and making path generation possible. A max-heap is used to efficiently select the cell with the highest entropy, while lazy heap entries and heap compaction reduce the cost of updating the heap during propagation. Placeholder tiles are dynamically resolved during generation to avoid requiring a tile for every possible path. Dynamic tile weights guide paths toward their targets.
-
-Contradictions are handled through backtracking strategies implemented using the Strategy pattern, allowing different recovery strategies to be selected without changing the solver. Checkpoints store only the mutable state needed to restore the grid, using the Memento pattern instead of expensive deep copies. \wassis also provides an optional path optimization step based on Dijkstra's algorithm, which can improve direct and merged paths after WFC generation.
-
-Finally, garbage collection is performed after failed attempts that require grid expansion to prevent memory usage from growing across generations. Since Pharo does not support true multithreading, \wassis runs multiple independent Pharo images to generate solutions in parallel.
-
-The implementation also includes a user interface that allows users to configure the generation, select the input system, and inspect the generated visualization. The tool provides additional views, including the step-by-step WFC animation, metrics dashboard, system graph, classes distance matrix, and MDS placement. These views support both the inspection of the generated solution and the analysis of the generation process.
+The next chapter evaluates how \wassis performs in practice. The experiments examine the generated visualizations and how configuration choices affect the ability of WFC to find valid solutions and the time required to do so.
 
 \end{document}
