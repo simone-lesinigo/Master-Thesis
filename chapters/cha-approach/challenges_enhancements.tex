@@ -72,7 +72,7 @@ Our approach does not explicitly minimize path crossings through a dedicated opt
 \subsection{Backtracking Strategies}
 \label{subsec:backtracking_strategies}
 
-The standard Wave Function Collapse (WFC) implementation~\citeonline{Gumin2016wfc} does not support backtracking and restart from scratch when a contradiction occurs. Inspired by the work of Karth~\etal~\citebibliography{Karth2022a}, we introduced backtracking into our approach to improve the success rate of the generation.
+The standard Wave Function Collapse implementation~\citeonline{Gumin2016wfc} does not support backtracking and restart from scratch when a contradiction occurs. Inspired by the work of Karth~\etal~\citebibliography{Karth2022a}, we introduced backtracking into our approach to improve the success rate of the generation.
 
 When a contradiction occurs, the generation process follows this recovery process:
 
@@ -107,9 +107,7 @@ When a checkpoint is restored, the cell is brought back to the state it had imme
 \subsection{Path Optimization}
 \label{subesc-approach:path_optimization}
 
-WFC generates valid paths between classes, but these paths are not always optimal. Since WFC uses local rules and random tile selection, despite weights boosting, paths may contain unnecessary deviations. To reduce these detours, we added an optional \textit{Path Optimization} step after WFC generation.
-
-The optimization removes the tiles of a selected path and rebuilds the path using Dijkstra's algorithm.
+WFC generates valid paths between classes, but these paths are not always optimal. Since WFC uses local rules and random tile selection, despite weights boosting, paths may contain unnecessary deviations. To reduce these detours, we added an optional \textit{Path Optimization} step after WFC generation. The optimization removes the tiles of a selected path and rebuilds the path using Dijkstra's algorithm:
 
 \begin{itemize}
 

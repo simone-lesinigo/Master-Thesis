@@ -41,21 +41,22 @@ For the second step of the observation phase, we use a weighted random choice to
 
 where $w_1,\ldots,w_n$ are the weights of the possible tiles of the cell.
 
-\noindent Note that Equation~\ref{eq:shannon_entropy_unnormalized} is the standard Shannon entropy expressed directly in terms of the tile weights instead of normalized probabilities. The equivalence with the standard formulation is shown in Appendix~\ref{sec:appendix_entropy}.
+\noindent Note that Equation~\ref{eq:shannon_entropy_unnormalized} is the standard Shannon entropy expressed directly in terms of the tile weights instead of normalized probabilities. Proof of the equivalence with the standard formulation is shown in Appendix~\ref{sec:appendix_entropy}.
 
 \paragraph{Tile Weights}
-The possible tiles were already shown in \figref{fig:initial_possible_tiles}. The empty tile is assigned a very large weight, while the path tiles have much smaller and relatively similar weights. This creates two different situations:
+The weights assigned to the tiles affect both the random tile selection and the entropy used to select the next cell. The empty tile has a very large weight, while the basic path tiles, such as straight and corner tiles, have much smaller and relatively similar weights. This leads to two situations:
 
 \begin{itemize}
-    \item If the empty tile is still among the possible tiles of a cell, its large weight dominates the weighted choice. As a result, the empty tile is very likely to be selected, and the entropy of the cell is low.
-    \item If the empty tile has been removed by the constraints, only path tiles remain. Since their weights are relatively similar, the weighted choice is less predictable and the entropy is high.
+    \item If the empty tile is still among the possible tiles of a cell, its large weight makes it very likely to be selected. The cell therefore has low entropy.
+    \item If the empty tile has been removed by constraint propagation, only path tiles remain. Since their weights are relatively similar, the choice is less predictable and the cell has higher entropy.
 \end{itemize}
 
-Additionally, path tile such as T-junctions, crossings, merged paths, and double paths, are assigned a weight of zero. This design choice serves two main purposes:
+\paragraph{Avoiding Unnecessary Paths}
+More complex path tiles, such as T junctions, crossings, merged paths, and double paths, are assigned a weight of zero. This means they are not selected during random tile selection as long as a positive weight alternative is available. They are only used when the constraints leave no other option.
 
-First, it prevents the generation of useless random paths, as shown in \figref{fig:useless_paths}. If a tile like a T-junction were selected unnecessarily, WFC would be forced to close the resulting extra path branch, creating redundant loops. The same idea also applies to straight and corner tiles. These basic tiles cannot have a weight of zero, as they are needed to generate paths. Therefore, when a cell can still be collapsed into the empty tile, it is forced to collapse into it. This prevents paths from being generated where they are not needed.
+This strategy helps prevent unnecessary paths. For example, selecting a T junction when no branching is needed would create an extra branch that WFC would later have to close, potentially creating redundant loops. The same applies to crossings and other complex path tiles, which should only be used when required by the relationships being represented.
 
-Second, assigning a weight of zero ensures that tiles are never chosen during weighted selection unless constraint propagation eliminates all the other alternatives, guaranteeing that crossings and junctions are generated only when strictly necessary.
+Straight and corner tiles, however, cannot have a weight of zero because they are needed to connect classes. Their weights remain much smaller than the weight of the empty tile. Therefore, when both empty and path tiles are possible, the empty tile is much more likely to be selected. This reduces the chance of generating paths in cells where they are not needed. An example of unnecessary paths is shown in \figref{fig:useless_paths}.
 
 \begin{figure}[ht]
     \centering
@@ -64,18 +65,21 @@ Second, assigning a weight of zero ensures that tiles are never chosen during we
     \label{fig:useless_paths}
 \end{figure}
 
-When classes are placed on the grid, their path entry and exit points are already fixed. This removes the empty tile from the cells adjacent to these points. These cells therefore have a high entropy and are selected before cells where the empty tile is still possible. An example is shown in \figref{fig:initial_class_placement}. By selecting the cell with the maximum entropy, we ensure that WFC starts generating the paths from the classes.
+\paragraph{Path First Generation}
+The tile weights also affect the order in which cells are selected. When classes are placed on the grid, their path entry and exit points are already fixed. Constraint propagation removes the empty tile from the cells next to these points, leaving only path tiles. These cells therefore have higher entropy than cells where the empty tile is still possible. As a result, they are selected first when using maximum entropy observation. An example is shown in \figref{fig:initial_class_placement}.
 
-As a path is generated, the constraints are propagated to neighboring cells. This removes the empty tile from cells along the path and increase their entropy. These cells then become the next candidates for observation. This process continues until the paths reach their targets. Only after the paths have been generated the remaining cells can be collapsed to the empty tile.
+As paths extend, constraint propagation removes the empty tile from neighboring cells along the paths. These cells also gain higher entropy and become candidates for the next observation. This encourages WFC to extend paths from their entry and exit points before filling the remaining grid with empty tiles.
 
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\linewidth]{figures/approach/initial_class_placement}
     \caption{Initial class placement on the grid, with fixed path entry and exit points.}
     \label{fig:initial_class_placement}
 \end{figure}
 
-An interesting consequence of this strategy is that paths do not close as soon as they reach their target. When a path reaches its target, constraint propagation can leave the last cell with only one possible tile, and/or with choices having zero weight. This results in a very low or zero entropy. Since our observation strategy selects cells with maximum entropy, WFC gives priority to other cells with higher entropy. As a result, paths can remain open while other paths are being generated. The same behavior can occur after all paths have been generated, when only their final tiles are still missing. In this case, WFC first fills the remaining cells with the empty tile and only then closes the paths by collapsing their final tiles, as shown in \figref{fig:not_closed_paths}.
+Another consequence of maximum entropy observation is that paths do not necessarily close as soon as they reach their targets. Constraint propagation may leave the last cell of a path with only one possible tile or with only tiles that have a weight of zero. In both cases, the cell has low entropy and receives lower priority than cells with higher entropy.
+
+As a result, paths can remain open while WFC generates other paths. Even after all paths have reached their targets, some final tiles may still be unassigned. WFC can therefore fill the remaining cells with empty tiles before closing these paths, as shown in \figref{fig:not_closed_paths}.
 
 \begin{figure}
     \centering
@@ -93,7 +97,7 @@ When a cell loses tile options, this change is propagated to its neighbors throu
 
 \begin{enumerate}
     \item When a cell $C$ loses at least one tile option, it is added to a queue.
-    \item While the queue is not empty, cell $C$ is popped, and its neighbors $N$ are checked.
+    \item While the queue is not empty, cell $C$ is removed from the queue, and its neighbors $N$ are checked.
     \item For each neighbor $N$, WFC removes any tile option whose symbol no longer matches at least one remaining tile in $C$.
     \item If any tile is removed from $N$, $N$ is added to the queue to update its own neighbors.
 \end{enumerate}
