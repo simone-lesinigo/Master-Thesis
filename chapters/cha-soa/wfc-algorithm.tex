@@ -3,10 +3,11 @@
 
 \begin{document}
 
-\subsection{Standard WFC}
-\label{subsec:soa_standard_wfc}
+\section{Wave Function Collapse (WFC) algorithm}
+\label{sec:soa_wfc}
+Wave Function Collapse is a procedural generation algorithm introduced by Maxim Gumin in 2016~\citeonline{Gumin2016wfc}. It progressively assigns tiles to cells in a grid, restricting the possible tiles for neighboring cells according to local compatibility rules~\citebibliography{Karth2022a}.
 
-Borrowing concepts and terminology from quantum mechanics, Wave Function Collapse (WFC) starts with a grid of cells, where each cell contains a set of possible tiles. This set represents the states that the cell can have before a final configuration is selected by the algorithm. A cell with multiple possible tiles is therefore said to be in a ``superposition'' state. The goal of WFC is to reduce these possibilities until every cell has been assigned to exactly one tile, while ensuring that all local constraints are satisfied.
+Borrowing concepts and terminology from quantum mechanics, Wave Function Collapse starts with a grid of cells, where each cell contains a set of possible tiles. This set represents the states that the cell can have before a final configuration is selected by the algorithm. A cell with multiple possible tiles is therefore said to be in a ``superposition'' state. The goal of WFC is to reduce these possibilities until every cell has been assigned to exactly one tile, while ensuring that all local constraints are satisfied.
 
 WFC is based on two main components: a \emph{tileset} and a set of \emph{adjacency rules}. The tileset defines the elements in which a cell can be collapsed to, while the adjacency rules specify which tiles are compatible with each other along each direction. These components are defined differently depending on the model, leading to two variants:
 
@@ -73,7 +74,7 @@ As multiple tiles may be valid choices for a cell, different observations can le
 
 If a cell reaches an empty set of candidate tiles, a contradiction has occurred, the current attempt is invalid, and the algorithm stops. In this case, the standard implementation by Gumin does not perform backtracking. Instead, the current generation attempt is discarded, and the algorithm starts again from the initial state. If repeated attempts fail to produce a valid configuration, the generation is considered unsuccessful. 
 
-Other WFC variants can introduce backtracking to recover from contradictions without restarting the entire generation. In this case, the algorithm can restore a previously saved state and make different choices from that point onward, relying on the fact that a different sequence of collapses may lead to a valid solution.
+Other WFC variants~\citebibliography{Karth2022a} can introduce backtracking to recover from contradictions without restarting the entire generation. In this case, the algorithm can restore a previously saved state and make different choices from that point onward, relying on the fact that a different sequence of collapses may lead to a valid solution.
 
 In \figref{fig:step-explanation}, we show a step of the main loop in the WFC algorithm (observation and propagation phases).
 
