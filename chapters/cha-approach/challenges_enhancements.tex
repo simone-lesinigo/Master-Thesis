@@ -22,13 +22,13 @@ To handle these cases, we perform a path ID propagation step immediately after c
     \item After updating placeholder tiles, WFC verifies that touching edges between adjacent resolved tiles match. If an edge mismatch is detected, a contradiction is signaled.
 \end{enumerate}
 
-An example of this process is illustrated in \figref{fig:pathID_resolution}. In the state shown on the left, a path segment has been collapsed using placeholder tiles (shown as black paths) because its specific path ID was temporarily unknown. In the next step, when the cell highlighted with the green border collapses into a resolved tile (a T-junction connected to the main path), it propagates the information about the concrete path ID to the path segment, immediately resolving it into concrete tiles. 
+An example of this process is illustrated in \figref{fig:pathID_resolution}. In the state on the left, a path segment has been collapsed using placeholder tiles (shown as black paths) because its specific path ID was temporarily unknown. In the next step, when the cell highlighted with the green border collapses into a resolved tile (a T-junction connected to the main path), it propagates the information about the concrete path ID to the path segment, immediately resolving it into concrete tiles. 
 
 Once all placeholders are resolved, WFC performs standard propagation from the collapsed cell. This ensures that the new constraints are propagated to neighboring cells.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\linewidth]{figures/approach/pathID_resolution}
+    \includegraphics[width=0.9\linewidth]{figures/approach/pathID_resolution}
     \caption{Resolution of path ID placeholders during generation.}
     \label{fig:pathID_resolution}
 \end{figure}

@@ -12,7 +12,7 @@ Before generating the paths, the classes must be placed on the grid. The goal is
     \item Determining the size of each class based on its number of connections.
     \item Computing a distance matrix between all pairs of classes.
     \item Computing target 2D positions using Multidimensional Scaling.
-    \item Placing the classes on the grid while respecting the placement constraints.
+    \item Placing the classes on the grid while respecting placement constraints.
 \end{enumerate}
 
 \subsection{Multi-cell Classes}
@@ -48,7 +48,7 @@ The resulting coordinates are then normalized and scaled to fit the current grid
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.6\linewidth]{figures/approach/MDS-positions}
+    \includegraphics[width=0.7\linewidth]{figures/approach/MDS-positions}
     \caption{Example of target positions calculated by MDS (normalized and scaled to the grid).}
     \label{fig:MDS-positions}
 \end{figure}
@@ -78,18 +78,18 @@ For each class, the algorithm first tries to use the target position computed by
 \begin{enumerate}
     \item The algorithm first tries to place the class at the target position computed by MDS.
     \item If the target position is not valid, the algorithm searches for valid positions in expanding rings around it, starting with the first ring around the target position.
-    \item If one or more valid positions are found in the current ring, the position with the smallest total Manhattan distance to the already placed connected classes is selected.
+    \item If one or more valid positions are found in the current ring, the position with the smallest total Manhattan distance to the already placed connected classes is selected. This criterion favors placements that keep strongly connected classes close to each other.
     \item If no valid position is found in the current ring, the algorithm continues with the next ring.
     \item This process is repeated until at least one valid position is found.
 \end{enumerate}
 
-If no valid position can be found, the grid is expanded and the placement process restarts. This allows the algorithm to create more space when the current grid cannot accommodate all classes under the placement constraints.
+If no valid position can be found, the grid is expanded and the placement process restarts. This allows the algorithm to create more space when the current grid cannot accommodate all classes under the placement constraints. 
 
-An example of this process for a class strongly connected to an already placed class is provided in \figref{fig:candidate_search}.
+An example of this process, illustrating the search for a valid position for a class strongly connected to an already placed class, is provided in \figref{fig:candidate_search}.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.9\linewidth]{figures/approach/candidate_search}
+    \includegraphics[width=\linewidth]{figures/approach/candidate_search}
     \caption{Candidate search example (minimum distance: 2)}
     \label{fig:candidate_search}
 \end{figure}
