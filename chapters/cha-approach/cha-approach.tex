@@ -5,16 +5,14 @@
 \chapter{From Code to Visualization}
 \label{chap:approach}
 
-In this chapter, we present the methodology implemented in \wassis to address the two challenges introduced in \secref{sec-intro:problem_statement}: how to place software entities on a canvas and how to display their relationships.
+In this chapter, we present how \wassis combines Multidimensional Scaling (MDS) and Wave Function Collapse (WFC) to position software entities on a canvas and draw the relationships between them while preserving connectivity and reducing visual clutter.
 
-\wassis is a prototype developed in Pharo that implements the complete pipeline, from the source code to generating and rendering the final visualization.
-
-The pipeline of our approach, illustrated in \figref{fig:approach_flow}, consists of four main phases:
+The proposed approach consists of four main phases, illustrated in  \figref{fig:approach_flow}:
 \begin{enumerate}
     \item \textbf{Initialization}: Parsing the source code to extract entities (classes) and their dependencies, initializing an empty grid.
-    \item \textbf{Layout via MDS}: Computing a distance matrix based on structural relationships, then applying Multidimensional Scaling (MDS) to position the classes on the grid.
-    \item \textbf{Path Generation via WFC}: Defining path tiles and leveraging Wave Function Collapse (WFC) to procedurally generate paths between the placed classes.
-    \item \textbf{Finalization}: Computing quantitative metrics and rendering the final visualization.
+    \item \textbf{Layout via MDS}: Computing a distance matrix based on structural relationships, then applying Multidimensional Scaling to position the classes on the grid.
+    \item \textbf{Path Generation via WFC}: Defining path tiles and leveraging Wave Function Collapse to procedurally generate paths between the placed classes.
+    \item \textbf{Finalization}: Computing metrics such as path length and edge crossings for the evaluation of the resulting visualization, and rendering the final result.
 \end{enumerate}
 
 \begin{figure}[ht]

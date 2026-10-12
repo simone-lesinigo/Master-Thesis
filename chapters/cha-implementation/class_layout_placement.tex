@@ -5,7 +5,7 @@
 
 \section{Class Layout and Placement}
 
-The placement process converts the structural relationships between classes into positions on the grid. The implementation follows the steps described in \secref{sec:layout_via_MDS}: computing pairwise distances, obtaining a two-dimensional embedding using metric Multidimensional Scaling (mMDS), mapping the resulting coordinates to grid positions, and placing the classes while respecting the defined constraints.
+The placement process converts the structural relationships between classes into positions on the grid. The implementation follows the steps described in \secref{sec:layout_via_MDS}: computing pairwise distances, obtaining a two-dimensional embedding using Multidimensional Scaling, mapping the resulting coordinates to grid positions, and placing the classes while respecting the defined constraints.
 
 \subsection{Distance Matrix and MDS}
 First, an $n \times n$ distance matrix is created, where $n$ is the number of classes. The diagonal is initialized to zero, while all other entries are initialized to infinity. Direct relationships are then used to fill the distances between connected classes. The distance of a relationship is computed as the reciprocal of its weight (\equref{eq:class-distance}), so stronger relationships result in smaller distances.
@@ -36,11 +36,11 @@ After the direct distances have been added, the Floyd-Warshall algorithm~\citebi
     \label{fig:distance-matrix}
 \end{figure}
 
-Classes that remain disconnected after Floyd-Warshall are assigned a distance larger than the graph diameter. This keeps disconnected classes farther from the others in the layout calculated by mMDS.
+Classes that remain disconnected after Floyd-Warshall are assigned a distance larger than the graph diameter. This keeps disconnected classes farther from the others in the layout calculated by MDS.
 
-Before running mMDS, a power transformation can be applied to the distances. Each distance $\delta_{ij}$ is transformed into $\delta_{ij}^{p}$, where $p$ is a configurable parameter. When $p > 1$, larger distances are emphasized compared to smaller ones. When $0 < p < 1$, smaller distances are emphasized compared to larger ones.
+Before running MDS, a power transformation can be applied to the distances. Each distance $\delta_{ij}$ is transformed into $\delta_{ij}^{p}$, where $p$ is a configurable parameter. When $p > 1$, larger distances are emphasized compared to smaller ones. When $0 < p < 1$, smaller distances are emphasized compared to larger ones.
 
-The resulting distance matrix is given to mMDS. The implementation uses the SMACOF iterative optimization process. It starts with random positions and updates them iteratively to reduce the difference between the target distances and the Euclidean distances between the classes. The process stops when the maximum number of iterations is reached or when the change in stress becomes smaller than the configured tolerance.
+The resulting distance matrix is given to MDS. The implementation uses the SMACOF iterative optimization process. It starts with random positions and updates them iteratively to reduce the difference between the target distances and the Euclidean distances between the classes. The process stops when the maximum number of iterations is reached or when the change in stress becomes smaller than the configured tolerance.
 
 The result is a 2D position for each class. These positions are normalized to the range $[0,1]$ using a global minimum ($v_{\min}$) and maximum ($v_{\max}$), considering all values across both dimensions.
 
@@ -59,11 +59,11 @@ If all classes collapse to the exact same position (\ie $v_{\max} - v_{\min} = 0
 
 The normalized coordinates are scaled to the grid size. For each dimension, the normalized value in $[0,1]$ is multiplied by the current grid size $n$, and the result is rounded to the nearest integer.
 
-This produces discrete integer coordinates for each class on the grid. Since mMDS can place classes at identical or very close positions, the normalization, scaling, and rounding process may map multiple classes to the same target position.
+This produces discrete integer coordinates for each class on the grid. Since MDS can place classes at identical or very close positions, the normalization, scaling, and rounding process may map multiple classes to the same target position.
 
 \subsection{Class Placement}
 
-Classes are placed on the grid according to the positions computed by mMDS. Since a class can occupy multiple cells, its area is represented as a \texttt{WSFootprint}. The footprint contains the nodes occupied by the class, its top-left node, and its side length. A class is always represented by a square footprint.
+Classes are placed on the grid according to the positions computed by MDS. Since a class can occupy multiple cells, its area is represented as a \texttt{WSFootprint}. The footprint contains the nodes occupied by the class, its top-left node, and its side length. A class is always represented by a square footprint.
 
 For each class, the algorithm first tries to use its target position. A position is valid only if the footprint fits in the grid and the required distance from other classes is maintained. If the target position is not valid, the algorithm searches for candidates in expanding rings around the target position, starting from the first ring. For each ring, all valid positions are collected. If at least one valid position is found, the search stops and the best candidate among those positions is selected.
 
