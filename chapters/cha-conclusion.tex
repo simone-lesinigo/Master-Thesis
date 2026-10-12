@@ -11,7 +11,7 @@ The main contribution of this work is the adaptation of WFC to software visualiz
 
 The experiments show that these changes allow WFC to generate software visualizations while respecting the structural relationships between classes. The results also show that the settings configuration has an important effect on the generation process. For instance, path boosting can help the paths' creation, while the choice of backtracking strategy can affect the number of successful generations. Increasing the minimum distance between classes makes the problem harder, as it requires larger grids and longer paths. 
 
-A key advantage is the way class placement and path generation work together. MDS provides initial positions for the classes, while WFC determines how to connect them on the grid. This combination allows the layout and the connections to be considered together, rather than treating them as independent steps. Path merging is a further benefit, as multiple relationships can share parts of the same path, reducing visual clutter, compared with drawing a separate path for each relationship.
+A key advantage is the way class placement and path generation work together. MDS provides initial positions for the classes, while WFC determines how to connect them on the grid. This combination allows the layout and the connections to be considered together, rather than treating them as independent steps. Path merging is a further benefit, as multiple relationships can share parts of the same path, reducing visual clutter in the visualization, compared with drawing a separate path for each relationship.
 
 However, these advantages come with a high computational cost. Some instances require a large number of attempts and long execution times, while others cannot be solved within the given time limits.
 
@@ -70,6 +70,6 @@ Further work is also needed to evaluate the approach on larger software systems 
     \item \textbf{Automatic Evaluation of Visualization:} The current evaluation mainly uses visual inspection and metrics such as path crossings, grid size, and execution time. Future work could introduce a combined quality measure based on path length, number of bends, crossings, and distance between classes. This measure could be used to compare different valid solutions and select the best one. A user study could also investigate whether the generated layouts help developers understand software relationships more easily.
 \end{itemize}
 
-Together, these improvements could help \wassis reduce generation time, handle larger and more complex software systems, and provide a better understanding of the quality of the generated visualizations.
+These improvements could help \wassis reduce generation time, handle larger and more complex software systems, and provide a better understanding of the quality of the generated visualizations.
 
 \end{document}
