@@ -17,7 +17,7 @@ However, these advantages come with a high computational cost. Some instances re
 
 Overall, our results show that WFC can be used for software visualization when its original mechanisms are adapted to the specific requirements of this problem. \wassis implements this approach and demonstrates that WFC can be adapted to handle the global constraints required by software visualization. At the same time, we highlight the need further work to improve the scalability and efficiency of our approach.
 
-In summary, this work provides a starting point for further research on the use of tile-based constraint solvers in software visualization. The results suggest that this approach is worth exploring further, particularly to improve its efficiency and evaluate its applicability to larger software systems.
+In summary, this work provides a starting point for further research on the use of tile-based constraint solvers in software visualization. The results suggest that this approach is worth exploring further, particularly to improve its overall computational efficiency and evaluate its practical applicability to larger, more complex software systems.
 
 \section{Limitations}
 
@@ -29,7 +29,7 @@ A second limitation is the difficulty of handling multiple relationship types at
 
 Another limitation is the class placement process. MDS provides target positions based on the distances between classes, but these positions do not always produce a grid that is easy for WFC to solve. \wassis can increase the grid size and try different placements, but this increases the execution time and does not guarantee that a solution will be found.
 
-Finally, the evaluation was performed on selected software systems and subsets of classes. The experiments provide useful information about the behavior of \wassis, but they do not show how it performs on much larger and denser software systems. In addition, the generated layouts were mainly evaluated using visual inspection and quantitative metrics. A user study with developers would be needed to understand whether the generated visualizations actually help with software comprehension.
+Finally, the evaluation was performed on selected software systems and subsets of classes. The experiments provide useful information about the behavior of \wassis, but they do not show how it performs on much larger and denser software systems. In addition, the generated layouts were mainly evaluated using visual inspection and quantitative metrics. A user study with developers is needed to test whether the generated visualizations actually improve software comprehension.
 
 \section{Future Work}
 

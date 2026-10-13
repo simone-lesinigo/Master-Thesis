@@ -4,7 +4,7 @@
 \begin{document}
 
 \section{Challenges \& Enhancements}
-In this section we present some challenges encountered during the development of our approach, how we solved them, and the specific enhancements made to adapt the WFC algorithm to software visualization.
+In this section we present challenges encountered during development, how we solved them, and the enhancements made to adapt WFC to software visualization.
 
 \subsection{Managing the Exploding Number of Tiles}
 A major challenge when scaling our approach to larger systems was the explosion in the number of tiles. In a naive implementation, each path requires dedicated tiles that encode the path ID on its edges, even if they were visually identical. We initially created 11 dedicated tiles for each unique path ID, plus additional tiles for every pair of overlapping paths. However, this caused the tileset size to explode as soon as we targeted larger software systems. Since the propagation phase is the most computationally intensive part of WFC, this naive design made the approach computationally infeasible even for medium-sized systems.
