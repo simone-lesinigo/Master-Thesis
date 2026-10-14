@@ -88,14 +88,15 @@ The main differences between \wassis and \plantuml are summarized in Table~\ref{
 
 \begin{table}[ht]
     \centering
-    \begin{tabular}{p{0.18\textwidth} p{0.35\textwidth} p{0.35\textwidth}}
+    \rowcolors{3}{xcolorblue}{white}
+    \begin{tabular}{p{0.15\textwidth} p{0.35\textwidth} p{0.35\textwidth}}
         \textbf{} & \textbf{Wassis} & \textbf{PlantUML} \\ \hline
-        \textbf{Layout} & Compact star layout; root near the center. & Traditional hierarchical layout. \\
-        \textbf{Space} & Uses the space in multiple directions. & Can become very wide for hierarchies with many subclasses. \\
-        \textbf{Paths} & Paths remain separated and easier to follow. & Several arrows can become close or overlap. \\
-        \textbf{Hierarchy} & Less explicit because classes are positioned according to graph distances. & More explicit because classes are organized by hierarchy level. \\
-        \textbf{Class Names} & Not shown directly on the main visualization. & Shown directly on each class. \\
-        \textbf{Time} & High for this example; approximately two weeks. & Milliseconds. \\ \hline
+        \textbf{Layout} & Compact star layout, the root is placed near the center. & Traditional hierarchical layout. \\
+        \textbf{Space} & Uses space in multiple directions. & May become very wide when many subclasses are present. \\
+        \textbf{Paths} & Paths remain separated and easier to follow, thanks to path merging. & Several arrows can become close or overlap with others. \\
+        \textbf{Hierarchy} & Less explicit because classes are positioned by graph distances & More explicit because classes are organized by hierarchy level. \\
+        \textbf{Class Names} & Not shown on visualization. & Shown directly on each class. \\
+        \textbf{Time} & Took approximately two weeks for this example. & Milliseconds. \\ \hline
     \end{tabular}
     \caption{Comparison between \wassis and \plantuml for the \texttt{Magnitude} hierarchy.}
     \label{tab:wassis_plantuml_comparison}
