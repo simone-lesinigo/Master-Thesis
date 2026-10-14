@@ -66,7 +66,7 @@ Straight and corner tiles, however, cannot have a weight of zero because they ar
 \end{figure}
 
 \paragraph{Path First Generation}
-The tile weights also affect the order in which cells are selected. When classes are placed on the grid, their path entry and exit points are already fixed. Constraint propagation removes the empty tile from cells next to these points, leaving only path tiles. These cells therefore have higher entropy than cells where the empty tile is still possible. As a result, they are selected first when using maximum entropy observation. An example is shown in \figref{fig:initial_class_placement}.
+The tile weights also affect the order in which cells are selected. When classes are placed on the grid, their path entry and exit points are already fixed. Constraint propagation removes the empty tile from cells next to these points, leaving only path tiles. These cells therefore have higher entropy than cells where the empty tile is still possible. As a result, they are selected first when using maximum-entropy observation. An example is shown in \figref{fig:initial_class_placement}.
 
 As paths extend, constraint propagation removes the empty tile from neighboring cells along the paths. These cells also gain higher entropy and become candidates for the next observation. This encourages WFC to extend paths from their entry and exit points before filling the remaining grid with empty tiles.
 
@@ -77,7 +77,7 @@ As paths extend, constraint propagation removes the empty tile from neighboring 
     \label{fig:initial_class_placement}
 \end{figure}
 
-Another consequence of maximum entropy observation is that paths do not necessarily close as soon as they reach their targets. Constraint propagation may leave the last cell of a path with only one possible tile or with only tiles that have a weight of zero. In both cases, the cell has low entropy and receives lower priority than cells with higher entropy.
+Another consequence of maximum-entropy observation is that paths do not necessarily close as soon as they reach their targets. Constraint propagation may leave the last cell of a path with only one possible tile or with only tiles that have a weight of zero. In both cases, the cell has low entropy and receives lower priority than cells with higher entropy.
 
 As a result, paths can remain open while WFC generates other paths. Even after all paths have reached their targets, some final tiles may still be unassigned. WFC can therefore fill the remaining cells with empty tiles before closing these paths, as shown in \figref{fig:not_closed_paths}.
 

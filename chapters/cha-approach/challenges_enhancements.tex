@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\section{Challenges \& Enhancements}
+\section{Challenges and Enhancements}
 In this section we present challenges encountered during development, how we solved them, and the enhancements made to adapt WFC to software visualization.
 
 \subsection{Managing the Exploding Number of Tiles}
@@ -72,7 +72,7 @@ Our approach does not explicitly minimize path crossings through a dedicated opt
 \subsection{Backtracking Strategies}
 \label{subsec:backtracking_strategies}
 
-The standard Wave Function Collapse implementation~\citeonline{Gumin2016wfc} does not support backtracking and restart from scratch when a contradiction occurs. Inspired by the work of Karth and Smith~\citebibliography{Karth2022a}, we introduced backtracking into our approach to improve the success rate of the generation.
+The standard Wave Function Collapse implementation~\citeonline{Gumin2016wfc} does not support backtracking and instead restart from scratch when a contradiction occurs. Inspired by the work of Karth and Smith~\citebibliography{Karth2022a}, we introduced backtracking to improve the success rate of the generation.
 
 When a contradiction occurs, the generation process follows this recovery process:
 

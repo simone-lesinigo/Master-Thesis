@@ -5,7 +5,7 @@
 
 \section{Graph-Based Visualizations}
 \label{sec:graph-based_visualization}
-Software systems can naturally be represented as graphs \citebibliography{DiBa1998a}, where software entities (such as classes or packages) are represented as nodes, and their relationships (such as dependencies or method calls) are represented as edges. To enhance graphs readability, various layout strategies have been proposed.
+Software systems can naturally be represented as graphs \citebibliography{DiBa1998a}, where software entities (such as classes or packages) are represented as nodes, and their relationships (such as dependencies or method calls) are represented as edges. To enhance graph readability, various layout strategies have been proposed.
 
 \subsection{Force-Directed Layout} Fruchterman and Reingold~\citebibliography{Fruc1991a} introduced a widely used layout algorithm based on a physical analogy. The algorithm is designed for undirected graphs and aims to distribute nodes evenly on the frame while keeping connected nodes close and reducing edge crossings. Nodes act as particles that repel each other, while edges act as springs that attract connected nodes. Starting from an initial node placement (that can be random), these forces move the nodes until the system reaches a stable state. The resulting layout should follow two main principles: connected nodes should be placed near each other, but nodes should not be placed too close to each other.
      

@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\section{Polymetric views}
+\section{Polymetric Views}
 
 In 2003, Lanza and Ducasse introduced \emph{polymetric views}, a lightweight software visualization technique for reverse engineering and program comprehension \citebibliography{Lanz2003a}. It is based on two-dimensional graphs, where nodes represent software entities, such as classes or methods, and edges represent their relationships. A polymetric view adds information to these graphs by mapping up to five software metrics to visual properties of each node: width, height, position ($X, Y$), and color (using a grayscale from white to black). These metrics are directly derived from the source code rather than being computed by combining other metrics. For example, they can describe different aspects of a class, method, or attribute. Class metrics include the number of methods (NOM), the number of attributes (NOA), and the number of immediate subclasses (NOC). Method metrics include lines of code (LOC), the number of parameters (NOP), and the number of statements (NOS). Attribute metrics include the number of direct accesses from outside the class (NGA) and from within the class (NLA). The authors defined several predefined views at different levels of detail, while also allowing developers to create custom views. This approach helps developers assess the overall structure and quality of a system, locate important components, and identify unusual entities that may need refactoring or further analysis. An example of a polymetric view is shown in \figref{fig:polymetricView}.
 

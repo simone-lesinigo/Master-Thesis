@@ -9,7 +9,7 @@ Introduced by Maxim Gumin in 2016~\citeonline{Gumin2016wfc}, WFC progressively a
 
 Borrowing concepts and terminology from quantum mechanics, Wave Function Collapse starts with a grid of cells, where each cell contains a set of possible tiles. This set represents the states that the cell can have before a final configuration is selected by the algorithm. A cell with multiple possible tiles is therefore said to be in a ``superposition'' state. The choice is followed by constraint propagation to update the possible tiles in neighboring cells. The goal of WFC is to reduce these possibilities until every cell has been assigned to exactly one tile, while ensuring that all local constraints are satisfied. This process gradually narrows the available choices until a valid configuration is reached across the entire grid.
 
-WFC is based on two main components: a \emph{tileset} and a set of \emph{adjacency rules}. The tileset defines the elements in which a cell can be collapsed to, while the adjacency rules specify which tiles are compatible with each other along each direction. These components are defined differently depending on the model, leading to two variants:
+WFC is based on two main components: a \emph{tileset} and a set of \emph{adjacency rules}. The tileset defines the elements to which a cell can collapse, while the adjacency rules specify which tiles are compatible with each other along each direction. These components are defined differently depending on the model, leading to two variants:
 
 \begin{itemize}
     \item \textbf{Tile-based model}: The tiles and their adjacency rules are manually defined by the user. Each tile has a set of compatible neighbors for each direction. This model provides direct control over both the elements that can be generated and their adjacency constraints, which can be specified independently for each direction. An example of the tile-based model from Gumin's GitHub repository~\citeonline{Gumin2016wfc} is shown in \figref{fig:wfc_tile_based}.
@@ -48,7 +48,7 @@ Regardless of the model, the generation process consists of two main phases: \em
                 \STATE Choose next cell to collapse
                 \STATE Collapse it to a tile
                 \STATE Propagate the constraints
-            \UNTIL{all cells are collapsed \OR no possible tiles for the selected cell remain}
+            \UNTIL{all cells are collapsed \OR no possible tiles remain for the selected cell}
         \end{algorithmic}
 \end{algorithm}
 
