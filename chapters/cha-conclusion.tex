@@ -13,11 +13,13 @@ The experiments show that these changes allow WFC to generate software visualiza
 
 A key advantage is the way class placement and path generation work together. MDS provides initial positions for the classes, while WFC determines how to connect them on the grid. This combination allows the layout and the connections to be considered together, rather than treating them as independent steps. Path merging is a further benefit, as multiple relationships can share parts of the same path, reducing visual clutter in the visualization, compared with drawing a separate path for each relationship.
 
-However, these advantages come with a high computational cost. Some instances require a large number of attempts and long execution times, while others cannot be solved within the given time limits.
+However, these advantages come with a high computational cost. Some instances require many attempts and long execution times, while others cannot be solved within the given time limits.
 
 Overall, our results show that WFC can be used for software visualization when its original mechanisms are adapted to the specific requirements of this problem. \wassis implements this approach and demonstrates that WFC can be adapted to handle the global constraints required by software visualization. At the same time, we highlight the need further work to improve the scalability and efficiency of our approach.
 
 In summary, this work provides a starting point for further research on the use of tile-based constraint solvers in software visualization. The results suggest that this approach is worth exploring further, particularly to improve its overall computational efficiency and evaluate its practical applicability to larger, more complex software systems.
+
+\clearpage
 
 \section{Limitations}
 
@@ -33,10 +35,10 @@ Finally, the evaluation was performed on selected software systems and subsets o
 
 \section{Future Work}
 
-Several ideas could be explored to address current limitations and make the approach more efficient for larger software systems.
+Several improvements could be explored to reduce generation time, handle larger and more complex software systems, and better evaluate the quality of the generated visualizations.
 
 \subsection{Performance and Scalability}
-The first set of improvements focuses on reducing the computational cost of WFC and making it possible to handle larger grids and more complex software systems:
+The first set of improvements focuses on reducing the computational cost of WFC:
 
 \begin{itemize}
     \item \textbf{GPU-based Propagation:} The propagation phase could be improved by using a GPU to process several cells in parallel. When a tile collapses, the constraints of its neighbors could be checked simultaneously, reducing the time required to remove incompatible tiles. However, the propagation queue would need to be handled carefully. A parallel implementation would also need to ensure that changes to the same cell do not cause inconsistencies.
@@ -57,7 +59,7 @@ These improvements focus on giving WFC more flexibility during generation and im
 
     \item \textbf{Better Tile Configuration:} The current tile weights and path boost values are configured by the user. Future work could investigate whether these values can be adjusted automatically during generation. For example, the solver could reduce the weight of tiles that are likely to create contradictions. Results from previous generations could also be used to select suitable parameters for similar software systems. This could reduce the need for manual configuration and improve the chances of finding a solution.
 
-    \item \textbf{Improved Class Placement:} The current class placement is based on MDS and a set of placement constraints. Future work could also consider the difficulty of path generation when selecting the final positions of classes. The solver could try several candidate placements and prefer those that provide more space for paths or reduce the number of difficult connections. This could reduce the number of failed WFC attempts and increase the chances of finding a valid solution.
+    \item \textbf{Improved Class Placement:} The current class placement is based on MDS and placement constraints. Future work could also consider path generation when selecting the final positions of classes. The solver could try several candidate placements and prefer those that provide more space for paths or reduce the number of difficult connections. This could reduce the number of failed WFC attempts and increase the chances of finding a valid solution.
 \end{itemize}
 
 \subsection{Evaluation}
@@ -70,6 +72,11 @@ Further work is also needed to evaluate the approach on larger software systems 
     \item \textbf{Automatic Evaluation of Visualization:} The current evaluation mainly uses visual inspection and metrics such as path crossings, grid size, and execution time. Future work could introduce a combined quality measure based on path length, number of bends, crossings, and distance between classes. This measure could be used to compare different valid solutions and select the best one. A user study could also investigate whether the generated layouts help developers understand software relationships more easily.
 \end{itemize}
 
-These improvements could help \wassis reduce generation time, handle larger and more complex software systems, and provide a better understanding of the quality of the generated visualizations.
+% These improvements could help \wassis reduce generation time, handle larger and more complex software systems, and provide a better understanding of the quality of the generated visualizations.
+
+\section{Closing Words}
+This thesis explored the use of Wave Function Collapse for software visualization. By combining MDS with WFC, \wassis provides a way to create clear and compact software representations.
+
+This work opens the door to further research on procedural techniques for software visualization. Improvements in scalability and performance could make this approach more practical and help developers better understand complex software systems.
 
 \end{document}
