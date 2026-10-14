@@ -15,7 +15,7 @@ The subtraction of one gives the percentage of steps completed before the first 
 
 \figref{fig:path_completion_point} shows the PCP for 193 tested instances. The histogram is strongly shifted towards low values, with an average PCP of around 20\%. This means that, on average, the path generation is completed after only 20\% of the observation phase. Therefore, more than 80\% of the observation phase on average is spent filling the grid with empty tiles and closing the paths.
 
-This information can also be used for backtracking. If a generation reaches more than 30\%/40\% of the observation steps without placing an empty tile, it can be stopped early, since it is unlikely to find a valid solution.
+This information can also be used for backtracking. If a generation reaches more than 30\%-40\% of the observation steps without placing an empty tile, it can be stopped early, since it is unlikely to find a valid solution.
 
 \begin{figure}[ht]
   \centering
@@ -117,7 +117,7 @@ All four solutions are generated using pure WFC. These examples show that the PC
 %   \label{fig:PCP_examples}
 % \end{figure}
 
-\subsection{PCP vs Execution Time}
+\subsection{PCP versus Execution Time}
 
 Since a lower PCP corresponds to fewer path tiles that needed to be generated, we expect that a lower PCP also leads to a shorter execution time. \figref{fig:pcp_vs_execTime_scatter} compares PCP and execution time for the 193 tested instances.
 
@@ -128,7 +128,7 @@ Since a lower PCP corresponds to fewer path tiles that needed to be generated, w
   \label{fig:pcp_vs_execTime_scatter}
 \end{figure}
 
-As shown in the scatter plot, the points are widely scattered, showing no relationship between the two metrics. For every PCP value, the execution time varies significantly.
+As shown in the scatter plot, the points are widely scattered, showing no clear relationship between the two metrics. For every PCP value, the execution time varies significantly.
 
 The absence of a clear correlation is further confirmed by the trend line, which is almost flat. The Spearman correlation is also low ($\rho = 0.23$), indicating a very weak positive correlation, although it is statistically significant ($p = 0.001$). Therefore, a lower PCP does not guarantee a faster generation time.
 

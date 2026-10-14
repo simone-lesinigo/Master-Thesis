@@ -9,15 +9,15 @@ In this chapter, we present the implementation details of \wassis, our tool deve
 
 \section{Development Environment}
 
-\wassis is implemented in Pharo~\citebibliography{Blac2009a}, a Smalltalk environment. This choice comes from the tradition of Smalltalk in software visualization and software analysis. Various tools such as \tool{Moose}~\citebibliography{Nier2005a}, \tool{CodeCity}~\citebibliography{Wett2007a}, and \tool{CodeCrawler}~\citebibliography{Lanz2003a}, were developed using Smalltalk. This makes Pharo a suitable environment for a software visualization tool such as \wassis.
+\wassis is implemented in Pharo~\citebibliography{Blac2009a}, a Smalltalk environment. This choice comes from the tradition of Smalltalk in software visualization and software analysis. Various tools such as \tool{Moose}~\citebibliography{Nier2005a}, \tool{CodeCity}~\citebibliography{Wett2007a}, and \tool{CodeCrawler}~\citebibliography{Lanz2003a} were developed using Smalltalk. This makes Pharo a suitable environment for a software visualization tool such as \wassis.
 
-In Pharo, everything is an object. This makes it possible to represent the main concepts of \wassis, such as grids, cells, tiles, paths, directly as objects. This keeps the implementation close to the conceptual model.
+In Pharo, everything is an object. This makes it possible to represent the main concepts of \wassis, such as grids, cells, tiles, and paths, directly as objects. This keeps the implementation close to the conceptual model.
 
 Finally, Pharo provides an interactive and reflective development environment with integrated inspector, debugging, and profiling tools. This was particularly useful for \wassis, as WFC continuously changes the state of cells during execution. For example, individual cells can be inspected to check their possible tiles, entropy, and neighbors during generation. This made it easier to understand and debug the generation process.
 
 \section{Software Architecture}
 
-\wassis is organized into two Pharo packages: \texttt{Wassis-Model}, which contains the core model and the algorithms, and \texttt{Wassis-Visualization}, which is responsible for rendering the results using Roassal~\citebibliography{Berg2022a}. \wassis core architecture is shown in \figref{fig:wassis_architecture}.
+\wassis is organized into two Pharo packages: \texttt{Wassis-Model}, which contains the core model and the algorithms, and \texttt{Wassis-Visualization}, which is responsible for rendering the results using Roassal~\citebibliography{Berg2022a}. The core architecture of \wassis is shown in \figref{fig:wassis_architecture}.
 
 At the highest level, \texttt{WSAdaptiveSolver} manages the execution process and the grid size. It creates a new \texttt{WSSolver} for each attempt, starting from an initial grid size and increasing it when no valid solution is found. Therefore, each \texttt{WSSolver} represents one execution of WFC on a grid of a fixed size. This separation keeps the WFC algorithm independent of the logic used to increase the grid size during multiple attempts.
 

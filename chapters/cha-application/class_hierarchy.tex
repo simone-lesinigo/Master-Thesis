@@ -38,7 +38,7 @@ To evaluate \wassis, we visualize the complete inheritance hierarchy of the \tex
         \caption{\wassis \texttt{Magnitude} hierarchy.}
         \label{fig:magnitude_wassis}
     \end{subfigure}
-    \caption{Comparison for the \texttt{Magnitude} class between \plantuml (a) and \wassis (b).}
+    \caption{Comparison of the \texttt{Magnitude} class hierarchy in \plantuml (a) and \wassis (b).}
     \label{fig:magnitude_comparison}
 \end{figure}
 
@@ -50,7 +50,7 @@ This layout makes the complete hierarchy fit in a relatively small area, making 
 
 \plantuml uses a hierarchical layout, where classes are organized into horizontal levels. Classes at the same hierarchy depth are placed on the same level, so the hierarchy grows from top to bottom and in width.
 
-In this example, the large number of subclasses of \texttt{Magnitude} makes the first level very wide. If the diagram was kept in its original orientation, it would need to be scaled to fit the available width, making it difficult to read. It is therefore rotated by 90 degrees in \figref{fig:magnitude_plantuml}. For larger hierarchies, horizontal scrolling is required to inspect the complete diagram. As a result, the complete structure cannot be viewed at once without scrolling, unlike in \wassis, where the compact layout allows the whole hierarchy to be seen at a glance.
+In this example, the large number of subclasses of \texttt{Magnitude} makes the first level very wide. If the diagram were kept in its original orientation, it would need to be scaled to fit the available width, making it difficult to read. It is therefore rotated by 90 degrees in \figref{fig:magnitude_plantuml}. For larger hierarchies, horizontal scrolling is required to inspect the complete diagram. As a result, the complete structure cannot be viewed at once without scrolling, unlike in \wassis, where the compact layout allows the whole hierarchy to be seen at a glance.
 
 \plantuml nevertheless has an important advantage: classes at the same hierarchy depth are placed on the same level. This makes the depth of the hierarchy immediately visible and makes it easy to follow the structure from one level to the next. In \wassis, classes are positioned according to the structure of the graph rather than their hierarchy depth. Therefore, classes at the same hierarchy level are not necessarily placed at the same distance from the root, making this information less direct.
 

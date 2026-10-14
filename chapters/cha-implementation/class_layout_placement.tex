@@ -122,7 +122,7 @@ After computing the preferred directions, each path is assigned to a specific bo
 
     \item Paths are first grouped by their primary preferred direction. Each group corresponds to one side of the class footprint, and paths in the same group compete for the cells available on that side. 
 
-    \item Groups with more paths are processed first, this order never changes. Within each group, paths are ordered by their primary direction cost. Paths with lower costs are assigned first. This gives priority to the paths that have a stronger preference for that side when there are more paths than available cells.
+    \item Groups with more paths are processed first, and this order never changes. Within each group, paths are ordered by their primary direction cost. Paths with lower costs are assigned first. This gives priority to the paths that have a stronger preference for that side when there are more paths than available cells.
 
     \item For each path in a group, its secondary direction is used to determine its position along the side. The path is assigned to the first available cell in the direction of its secondary preference. For example, if the primary direction is \textit{right} and the secondary direction is \textit{up}, the path is assigned to the highest available cell on the right side (\ie the cell with the minimum row index).
 

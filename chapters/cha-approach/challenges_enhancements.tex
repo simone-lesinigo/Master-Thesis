@@ -11,7 +11,7 @@ A major challenge when scaling our approach to larger systems was the explosion 
 
 To address this issue, we introduced a \emph{placeholder tile system}. At initialization, every grid cell contains the empty tile and a fixed set of 14 generic path tiles, where path identities are represented by placeholders rather than concrete IDs. This strategy bounds the candidate tileset of each cell to 15 tiles regardless of the total number of paths, keeping constraint propagation tractable. Concrete path IDs are originally embedded only in the edges of the class nodes placed on the grid. As path cells collapse, path ID information propagates from cell to cell, resolving placeholders into concrete tiles on the fly.
 
-This works because our cell selection strategy targets the cell with the maximum entropy (\subsecref{subsec:wassis_observation_phase}), so cells adjacent to already established paths are prioritized. However, when multiple candidate cells share the exact same entropy, WFC may collapse a path cell that is not yet connected to a resolved neighbor, leaving its path ID temporarily unknown. This is represented as a black path, an example is shown in \figref{fig:pathID_resolution} (left).
+This works because our cell selection strategy targets the cell with the maximum entropy (\subsecref{subsec:wassis_observation_phase}), so cells adjacent to already established paths are prioritized. However, when multiple candidate cells share the exact same entropy, WFC may collapse a path cell that is not yet connected to a resolved neighbor, leaving its path ID temporarily unknown. This is represented as a black path, as shown on the left in  \figref{fig:pathID_resolution}.
 
 To handle these cases, we perform a path ID propagation step immediately after collapsing a cell and before standard WFC propagation begins. The resolution process operates as follows:
 
@@ -72,7 +72,7 @@ Our approach does not explicitly minimize path crossings through a dedicated opt
 \subsection{Backtracking Strategies}
 \label{subsec:backtracking_strategies}
 
-The standard Wave Function Collapse implementation~\citeonline{Gumin2016wfc} does not support backtracking and instead restart from scratch when a contradiction occurs. Inspired by the work of Karth and Smith~\citebibliography{Karth2022a}, we introduced backtracking to improve the success rate of the generation.
+The standard Wave Function Collapse implementation~\citeonline{Gumin2016wfc} does not support backtracking and instead restarts from scratch when a contradiction occurs. Inspired by the work of Karth and Smith~\citebibliography{Karth2022a}, we introduced backtracking to improve the success rate of the generation.
 
 When a contradiction occurs, the generation process follows this recovery process:
 

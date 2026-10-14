@@ -10,7 +10,7 @@ Since its introduction by Gumin~\citeonline{Gumin2016wfc}, Wave Function Collaps
 
 \paragraph{Formalization and Different Strategies.}
 
-Karth and Smith~\citebibliography{Karth2022a} provided a formal description of the WFC algorithm. They studied different strategies for cells and tiles selection, as well as the use of backtracking and global constraints. Their results showed that these choices can significantly affect both the generation process and the final output. In particular, they showed that the restart from scratch strategy used in Gumin's original implementation works well with simple local rules, but becomes less effective when global constraints are introduced. In such cases, the number of contradictions increases significantly, making backtracking essential.
+Karth and Smith~\citebibliography{Karth2022a} provided a formal description of the WFC algorithm. They studied different strategies for cell and tile selection, as well as the use of backtracking and global constraints. Their results showed that these choices can significantly affect both the generation process and the final output. In particular, they showed that the restart from scratch strategy used in Gumin's original implementation works well with simple local rules, but becomes less effective when global constraints are introduced. In such cases, the number of contradictions increases significantly, making backtracking essential.
 
 \paragraph{Global Constraints.}
 
@@ -94,7 +94,7 @@ To fix this issue, Nie~\etal~\citebibliography{Nie2023a} introduced Nested Wave 
 
 \paragraph{Non-Uniform Tiles.}
 
-Standard WFC assumes that all tiles have the same size and shape. Piepenbrink and Bidarra~\citebibliography{Piep2025a} addressed this limitation with Non-Uniform Tile Wave Function Collapse (\emph{nutWFC}). Their approach allows tiles with different shapes and sizes to occupy multiple cells. To preserve the structure of these multi-cells tiles, they split each tile into single-cell units called \textit{atoms}, each identified by a unique ID. They then defined strict adjacency constraints between these atoms. These constraints ensure that all atoms of the same tile are collapsed together, preserving their original shape and size during generation.
+Standard WFC assumes that all tiles have the same size and shape. Piepenbrink and Bidarra~\citebibliography{Piep2025a} addressed this limitation with Non-Uniform Tile Wave Function Collapse (\emph{nutWFC}). Their approach allows tiles with different shapes and sizes to occupy multiple cells. To preserve the structure of these multi-cell tiles, they split each tile into single-cell units called \textit{atoms}, each identified by a unique ID. They then defined strict adjacency constraints between these atoms. These constraints ensure that all atoms of the same tile are collapsed together, preserving their original shape and size during generation.
 
 \paragraph{Poetry.}
 
