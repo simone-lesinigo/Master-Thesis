@@ -1,0 +1,23 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Software Visualization}
+Software visualization helps developers understand software systems by representing their entities and relationships. Different techniques have been proposed to organize entities and display their connections. In this chapter, we review the main approaches and their limitations, identifying the challenges addressed by this thesis.
+
+\subfile{graph-based.tex}
+\subfile{polymetric_views.tex}
+\subfile{3DandVR.tex}
+\subfile{cartographic.tex}
+
+\section{Summary}
+
+In this chapter, we reviewed different techniques for software visualization and discussed how they represent software entities and their relationships.
+
+\paragraph{State of the Art.}
+Existing techniques offer different ways to organize and visualize software systems. Graph-based layouts focus on positioning entities and drawing connections~\citebibliography{DiBa1998a, Fruc1991a, Tama1987a, Holt2006a}, while polymetric views use visual properties to represent software metrics~\citebibliography{Agou2022a, Lanz2003a}. 3D and VR visualizations use spatial representations to support software exploration~\citebibliography{Wett2007a, Case2011a, More2023a, Hoff2024a, Gian2024a}, while cartographic approaches place entities according to their similarities~\citebibliography{Kuhn2010a}. These techniques provide different ways to understand software structure, but representing relationships clearly remains an important aspect of software visualization.
+
+\paragraph{Research Gap.}
+Despite the variety of existing techniques, drawing software relationships while preserving connectivity and reducing overlaps remains challenging. Entity placement and relationship drawing must be coordinated to produce clear visualizations. This motivates exploring approaches that draw connections clearly while ensuring all software relationships are represented correctly. In the next chapter, we introduce Wave Function Collapse, an algorithm using local compatibility rules to assign tiles to a grid, and discuss its potential for addressing this problem.
+
+\end{document}

@@ -5,7 +5,7 @@
 
 \section{Wave Function Collapse algorithm}
 \label{sec:soa_wfc}
-Wave Function Collapse is a procedural generation algorithm introduced by Maxim Gumin in 2016~\citeonline{Gumin2016wfc}. It progressively assigns tiles to cells in a grid, restricting the possible tiles for neighboring cells according to local compatibility rules~\citebibliography{Karth2022a}.
+Introduced by Maxim Gumin in 2016~\citeonline{Gumin2016wfc}, WFC progressively assigns tiles to cells in a grid, restricting the possible tiles for neighboring cells according to local compatibility rules~\citebibliography{Karth2022a}.
 
 Borrowing concepts and terminology from quantum mechanics, Wave Function Collapse starts with a grid of cells, where each cell contains a set of possible tiles. This set represents the states that the cell can have before a final configuration is selected by the algorithm. A cell with multiple possible tiles is therefore said to be in a ``superposition'' state. The choice is followed by constraint propagation to update the possible tiles in neighboring cells. The goal of WFC is to reduce these possibilities until every cell has been assigned to exactly one tile, while ensuring that all local constraints are satisfied. This process gradually narrows the available choices until a valid configuration is reached across the entire grid.
 
@@ -14,16 +14,20 @@ WFC is based on two main components: a \emph{tileset} and a set of \emph{adjacen
 \begin{itemize}
     \item \textbf{Tile-based model}: The tiles and their adjacency rules are manually defined by the user. Each tile has a set of compatible neighbors for each direction. This model provides direct control over both the elements that can be generated and their adjacency constraints, which can be specified independently for each direction. An example of the tile-based model from Gumin's GitHub repository~\citeonline{Gumin2016wfc} is shown in \figref{fig:wfc_tile_based}.
 
-    \begin{figure}[ht]
-        \centering
-        \includegraphics[width=0.86\linewidth]{figures/soa/tile-based_example}
-        \caption{Example of tile-based model.}
-        \label{fig:wfc_tile_based}
-    \end{figure}
-
     \item \textbf{Overlapping model}: The tiles and their adjacency rules are extracted from an input example. This allows WFC to reproduce local patterns from the input while generating a new configuration. Some examples of the overlapping model from Gumin's GitHub repository~\citeonline{Gumin2016wfc} are shown in \figref{fig:wfc_overlapping}.
 
 \end{itemize}
+
+The choice of model depends on the type of output and the information available. The tile-based model is useful when the desired elements and their compatibility rules can be defined directly. In contrast, the overlapping model is suitable when the goal is to learn local patterns from an existing example. In both cases, the quality of the result depends on the tiles and constraints provided to the algorithm.
+
+\clearpage
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.86\linewidth]{figures/soa/tile-based_example}
+    \caption{Example of tile-based model.}
+    \label{fig:wfc_tile_based}
+\end{figure}
 
 \begin{figure}[ht]
     \centering
@@ -34,7 +38,7 @@ WFC is based on two main components: a \emph{tileset} and a set of \emph{adjacen
 
 Regardless of the model, the generation process consists of two main phases: \emph{observation} and \emph{propagation}. The overall process is summarized in \algref{alg:wfc}.
 
-\begin{algorithm}
+\begin{algorithm}[!h]
     \caption{Wave Function Collapse}
     \label{alg:wfc}
         \begin{algorithmic}[1]
