@@ -105,7 +105,7 @@ Cosine similarity measures how well a direction matches the direction towards th
 
 The four grid directions are then sorted by increasing cost. This produces an ordered list of preferred directions for each path ID of a class. The first direction is therefore the preferred one.
 
-An example is provided in \figref{fig:cosine_similarity}. Since the source class has a $3 \times 3$ footprint, its center cell is used as the reference position. The target position (path centroid) results in a vector $\mathbf{A} = (6,2)$ from the class center. Comparing this vector with the four grid directions gives the following costs: up $= 0.658$, left $= 1.949$, right $= 0.051$, and down $= 1.316$. The directions are therefore ordered as right, up, down, and left. % The right direction is the preferred direction for this path ID, making the right side of the top-right cell of the class footprint the most likely location for the path exit.
+An example is provided in \figref{fig:cosine_similarity}. Since the source class has a $3 \times 3$ footprint, its center cell is used as the reference position. The target position (path centroid) results in a vector $\mathbf{A} = (6,2)$ from the class center. Comparing this vector with the four grid directions gives the following costs: up $= 0.684$, left $= 1.949$, right $= 0.051$, and down $= 1.316$. The directions are therefore ordered as right, up, down, and left. % The right direction is the preferred direction for this path ID, making the right side of the top-right cell of the class footprint the most likely location for the path exit.
 
 \begin{figure}[ht]
     \centering
