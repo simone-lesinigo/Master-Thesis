@@ -62,7 +62,7 @@ After this resolution process, \wassis checks the edges of the resolved tiles ag
 
 \subsection{Dynamic Tile Weights}
 
-To guide paths toward their targets, \wassis uses dynamic tile weights in addition to fixed path exits. When a cell is selected for collapse, its possible tiles are assigned weights based on the direction of the target for the weighted choice. If the cell has a path target, \wassis increases the weight of tiles whose shape point toward that target.
+To guide paths toward their targets, \wassis uses dynamic tile weights in addition to fixed path exits. When a cell is selected for collapse, its possible tiles are assigned weights based on the direction of the target for the weighted choice. If the cell has a path target, \wassis increases the weight of tiles whose shape points toward that target.
 
 Path target information is propagated in the same way as path IDs. Initially, target information is associated with the classes placed on the grid. When a path ID is propagated to a resolved path tile, the corresponding target information is also propagated. This allows cells along the path to know the target associated with the path they will collapse to.
 

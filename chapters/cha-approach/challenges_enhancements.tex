@@ -117,7 +117,7 @@ WFC generates valid paths between classes, but these paths are not always optima
 
     \begin{enumerate}
         \item \textit{Backbone Creation:} Dijkstra's algorithm is used to find the shortest path between every pair of classes. The longest path is chosen as the backbone.
-        \item \textit{Virtual Node Target:} Each remaining class is connected to the closest node of the backbone using the shortest path.
+        \item \textit{Virtual Target Node:} Each remaining class is connected to the closest node of the backbone using the shortest path.
         \item \textit{Backbone Expansion:} After a class is connected, the new branch of the path is added to the backbone. The remaining classes can connect to both the original backbone and the new branches.
     \end{enumerate}
 
