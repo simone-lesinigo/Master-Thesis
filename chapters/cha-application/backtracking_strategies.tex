@@ -22,11 +22,11 @@ During each generation, the solver allowed up to 5 backtracks on the same grid. 
 The five strategies were:
 
 \begin{itemize}
-    \item \textbf{Fixed Number of Steps:} goes back a fixed number of collapse steps. We used 50 steps.
-    \item \textbf{Percentage of Steps:} goes back by a fixed percentage of the collapse steps. We used 20\%.
-    \item \textbf{Many Possible Tiles:} goes back to a checkpoint saved before a cell with many possible tiles was collapsed. The minimum number of tiles was 7.
-    \item \textbf{Similar Tile Weights:} goes back to a checkpoint saved before a cell with similar tile weights was collapsed. This was triggered when at least 30\% of the candidate tiles had a maximum weight difference of 20\%.
-    \item \textbf{Restart:} discards the current solution and starts the path generation from the beginning.
+    \item \textbf{Fixed Number of Steps:} Goes back a fixed number of collapse steps. We used 50 steps.
+    \item \textbf{Percentage of Steps:} Goes back by a fixed percentage of the collapse steps. We used 20\%.
+    \item \textbf{Many Possible Tiles:} Goes back to a checkpoint saved before a cell with many possible tiles was collapsed. The minimum number of tiles was 7.
+    \item \textbf{Similar Tile Weights:} Goes back to a checkpoint saved before a cell with similar tile weights was collapsed. This was triggered when at least 30\% of the candidate tiles had a maximum weight difference of 20\%.
+    \item \textbf{Restart:} Discards the current solution and starts the path generation from the beginning.
 \end{itemize}
 
 \subsection{Experimental Results and Analysis}
