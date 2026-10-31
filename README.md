@@ -17,7 +17,7 @@ The research resulted in a peer-reviewed paper presented at [VISSOFT 2026](https
 - **Degree:** Master's in Informatics / Master's in Computer Science (Double Degree)
 - **Final Grade:** 110/110 cum laude
 - **Graduation Date:** October 28, 2026
-- **Thesis:** [On Using Wave Function Collapse for Depicting Software Systems](submitted-PDf/Lesinigo%20-%20Master%20Thesis.pdf)
+- **Thesis:** [On Using Wave Function Collapse for Depicting Software Systems](submitted-PDF/Lesinigo%20-%20Master%20Thesis.pdf)
 
 ## 📄 Related Publication
 

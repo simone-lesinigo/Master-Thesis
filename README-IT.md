@@ -17,7 +17,7 @@ La ricerca ha portato alla pubblicazione di un articolo scientifico, presentato 
 - **Titolo di studio:** Master in Informatics / Laurea Magistrale in Informatica (Doppia Laurea)
 - **Voto finale:** 110/110 e lode
 - **Data di laurea:** 28 ottobre 2026
-- **Tesi:** [On Using Wave Function Collapse for Depicting Software Systems](submitted-PDf/Lesinigo%20-%20Master%20Thesis.pdf)
+- **Tesi:** [On Using Wave Function Collapse for Depicting Software Systems](submitted-PDF/Lesinigo%20-%20Master%20Thesis.pdf)
 
 ## 📄 Pubblicazione
 
